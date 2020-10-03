@@ -5,7 +5,9 @@ RUN apk update \
  && openssl req -x509 -nodes -days 365 -subj "/C=CA/ST=QC/O=Company, Inc./CN=mydomain.com" -addext "subjectAltName=DNS:mydomain.com" -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt \
  && apk del openssl \
  && mkdir -p /run/nginx \
- && mkdir -p /var/www/app
+ && mkdir -p /var/www/app \
+ && ln -sf /dev/stdout /var/log/nginx/access.log \
+ && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY nginx-block.conf /etc/nginx/conf.d/default.conf
 COPY index.html /var/www/app
