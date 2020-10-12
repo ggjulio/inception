@@ -6,12 +6,16 @@ metadata:
   name: test
 spec:
   type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+    - name: https
+      port: 443
+      targetPort: 443
   selector:
     app: test
-  ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 80
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -26,13 +30,15 @@ spec:
       app: test
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: test
     spec:
       containers:
-      - image: my-nginx
+      - name: my-nginx
+        image: my-nginx
         imagePullPolicy: Never
-        name: my-nginx
-        resources: {}
-status: {}
+        ports:
+        - containerPort: 80
+          name : http
+        - containerPort: 443
+          name : https

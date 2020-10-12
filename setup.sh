@@ -13,7 +13,7 @@ docker build -t my-nginx srcs/images/nginx/ > /dev/null
 
 
 kubectl apply -f configMap-metallb.yaml
-kubectl apply --filename srcs/deployments/test.yaml
+kubectl apply --filename srcs/deployments/
 
 # minikube dashboard
 
