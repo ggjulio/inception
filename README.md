@@ -11,3 +11,13 @@
 
 
 - https://medium.com/kubernetes-costa-rica/kubernetes-nodeport-vs-loadbalancer-vs-ingress-cuando-usar-cu%C3%A1l-5930df5619c
+
+Problemes sujet :
+nginx + php dans meme container.   
+minikube non specifie dans le sujet.   
+
+
+https://github.com/kelseyhightower/kubernetes-the-hard-way
+
+https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
+https://medium.com/@shoaib_masood/metallb-network-loadbalancer-minikube-335d846dfdbe  

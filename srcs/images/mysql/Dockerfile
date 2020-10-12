@@ -5,7 +5,7 @@ RUN apk update \
 	&& mkdir -p /run/mysqld \
 	&& addgroup mysql mysql \
 	&& chown -R mysql:mysql /var/lib/mysql \
-	&& mysql --user=mysql \
+	&& mysql --user=mysql
 
 
 
