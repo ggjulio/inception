@@ -11,9 +11,7 @@ eval $(minikube docker-env)
 
 docker build -t my-nginx srcs/images/nginx/ > /dev/null
 
-
-kubectl apply -f configMap-metallb.yaml
-kubectl apply --filename srcs/deployments/
+kubectl apply --filename srcs/k8s_objects/
 
 # minikube dashboard
 
