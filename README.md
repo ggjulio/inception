@@ -30,6 +30,12 @@ https://hynek.me/articles/docker-signals/
 https://ubuntu.com/blog/avoiding-dropped-connections-in-nginx-containers-with-stopsignal-sigquit
 https://stackoverflow.com/questions/36781372/docker-using-gosu-vs-user
 https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+https://stackoverflow.com/questions/50319492/difference-between-and-set-ex-in-dockerfiles
+https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425
+https://github.com/koalaman/shellcheck/issues/1489
+https://coderwall.com/p/fkfaqq/safer-bash-scripts-with-set-euxo-pipefail
+https://www.freebsd.org/cgi/man.cgi?query=sh&sektion=&n=1
+
 #### MYSQL
 
 https://hub.docker.com/_/mysql
