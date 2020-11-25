@@ -35,7 +35,7 @@ https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425
 https://github.com/koalaman/shellcheck/issues/1489
 https://coderwall.com/p/fkfaqq/safer-bash-scripts-with-set-euxo-pipefail
 https://www.freebsd.org/cgi/man.cgi?query=sh&sektion=&n=1
-
+https://stackoverflow.com/questions/40547032/bash-read-returns-with-exit-code-1-even-though-it-runs-as-expected
 #### MYSQL
 
 https://hub.docker.com/_/mysql
@@ -46,3 +46,4 @@ https://dev.mysql.com/doc/refman/5.6/en/mysql-install-db.html
 https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/
 https://stackoverflow.com/questions/14779104/mysql-how-to-allow-remote-connection-to-mysql
 https://success.mirantis.com/article/use-a-script-to-initialize-stateful-container-data
+https://unix.stackexchange.com/questions/265149/why-is-set-o-errexit-breaking-this-read-heredoc-expression/265151
