@@ -37,7 +37,9 @@
 
 - https://hub.docker.com/_/mysql
 - https://github.com/docker-library/mysql/blob/master/5.6/Dockerfile
+- https://github.com/docker-library/mariadb/blob/master/10.5/Dockerfile
 - https://github.com/docker-library/mysql/blob/master/5.6/docker-entrypoint.sh
+- https://github.com/docker-library/mariadb/blob/master/10.5/docker-entrypoint.sh
 - https://mariadb.com/kb/en/installing-system-tables-mysql_install_db/
 - https://dev.mysql.com/doc/refman/5.6/en/mysql-install-db.html
 - https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/
