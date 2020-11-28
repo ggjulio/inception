@@ -21,19 +21,19 @@ temp_server_start(){
 
 	mysqld --skip-networking --socket="${SOCKET}" &
 	log_info 'Waiting server  startup'
-	# count from 1 to 30
-	A=0
-	while [ $A -le 30 ]; do
-		echo "$A : "
-		echo "SELECT 1;" | mysql
-		if [ -z $? ]; then
-			log_info 'break>>>>>>>>>>>>>>>>>'
+	i=30 		# wait 30s maximum
+	while [ $i -gt 0 ]; do
+		has_started="$(echo "SELECT 1; " | mysql 2> /dev/null || true)"
+		if [ "$has_started" ]; then
 			break
 		fi
 		sleep 1
-		A=$(expr $A + 1)
+		i=$((i - 1))
 	done
-
+	if [ "$i" = "0" ]; then
+		log_error 'Unable to start server.'
+	fi
+	log_info 'Server started.'
 }
 
 temp_server_stop(){
@@ -56,12 +56,12 @@ setup_db(){
 	EOF
 
 	log_info "Creating.........."
-	mysql           <<-EOF
+	# mysql           <<-EOF
 
-		FLUSH PRIVILEGES;
-		${grootCreate}
-		DROP DATABASE IF EXISTS test;
-	EOF
+	# 	FLUSH PRIVILEGES;
+	# 	${grootCreate}
+	# 	DROP DATABASE IF EXISTS test;
+	# EOF
 
 }
 
