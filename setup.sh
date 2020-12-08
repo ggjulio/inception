@@ -10,6 +10,7 @@ IP=$(minikube ip)
 eval $(minikube docker-env)
 
 docker build -t my-nginx srcs/images/nginx/ > /dev/null
+docker build -t my-mysql srcs/images/mysql/ > /dev/null
 
 kubectl apply --filename srcs/k8s_objects/
 
