@@ -36,26 +36,30 @@ spec:
         app: my-nginx
         env: learning
     spec:
+      volumes:
+        - name: nginx-config
+          configMap:
+              name: nginx-config
       shareProcessNamespace: true
       containers:
-      - name: my-nginx
-        image: my-nginx
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 80
-          name : http
-        - containerPort: 443
-          name : https
-        volumeMounts:
-          - name: nginx configuration
-            mountPath: /etc/nginx/conf.d/default.conf
-            subPath: default.conf
-      - name: my-php
-        image: my-php
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 9000
-          name : delete-port-if-socker-used
+        - name: my-nginx
+          image: my-nginx
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 80
+            name : http
+          - containerPort: 443
+            name : https
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d/
+              name: nginx-config
+              readOnly: true
+        - name: my-php-fpm
+          image: my-php-fpm
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 9000
+            name : tcp
 
 
 
@@ -63,10 +67,12 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: metallb-system
   name: nginx-config
+  labels:
+    app: wordpress
+    env: learning 
 data:
-  config: |
+  default.conf: |
     # Upstream to abstract backend connection(s) for php
     upstream php {
         server unix:/tmp/php-cgi.socket;
@@ -92,24 +98,24 @@ data:
         error_page		497	https://$server_name:443$request_uri;   #redirect  when 400 code error
 
         root /var/www/app;
-        index index.php;
+        index index.php index.html;
 
         server_name localhost;
 
-       location / {
-                # This is cool because no php is touched for static content.
-                # include the "?$args" part so non-default permalinks doesn't break when using query string
-                try_files $uri $uri/ /index.php?$args;
+        location / {
+                  autoindex on;
+                  # This is cool because no php is touched for static content.
+                  # include the "?$args" part so non-default permalinks doesn't break when using query string
+                  # try_files $uri $uri/ /index.php?$args;
         }
 
-
         location ~ \.php$ {
-                # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
-                include fastcgi_params;
-                fastcgi_intercept_errors on;
-                fastcgi_pass php;
-                # The following parameter can be also included in fastcgi_params file
-                fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                  # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+                  include fastcgi_params;
+                  fastcgi_intercept_errors on;
+                  fastcgi_pass php;
+                  # The following parameter can be also included in fastcgi_params file
+                  fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
 
         # test

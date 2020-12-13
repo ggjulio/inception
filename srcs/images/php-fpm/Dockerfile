@@ -22,4 +22,4 @@ decorate_workers_output = no										\n\
 # add cgi.fix_pathinfo = 0; in php.ini
 EXPOSE 9000
 
-CMD ["php-fpm"]
+CMD ["php-fpm7"]

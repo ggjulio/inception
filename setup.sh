@@ -11,8 +11,9 @@ eval $(minikube docker-env)
 
 docker build -t my-nginx srcs/images/nginx/ > /dev/null
 docker build -t my-mysql srcs/images/mysql/ > /dev/null
+docker build -t my-php-fpm srcs/images/php-fpm/ > /dev/null
 
-kubectl apply --filename srcs/k8s_objects/
+#kubectl apply --filename srcs/k8s_objects/
 
 # minikube dashboard
 
