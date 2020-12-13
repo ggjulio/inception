@@ -7,8 +7,8 @@
 - https://wiki.alpinelinux.org/wiki/MariaDB   
 - https://mariadb.com/kb/en/running-mysqld-as-root/    
 - https://cloud.google.com/solutions/best-practices-for-building-containers
+- https://cloud.google.com/solutions/best-practices-for-operating-containers
 - https://rtfm.co.ua/en/kubernetes-clusterip-vs-nodeport-vs-loadbalancer-services-and-ingress-an-overview-with-examples/ 
-
 
 - https://medium.com/kubernetes-costa-rica/kubernetes-nodeport-vs-loadbalancer-vs-ingress-cuando-usar-cu%C3%A1l-5930df5619c
 
@@ -18,6 +18,8 @@
 
 - https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
 - https://medium.com/@shoaib_masood/metallb-network-loadbalancer-minikube-335d846dfdbe  
+- https://www.redhat.com/cms/managed-files/cm-oreilly-kubernetes-patterns-ebook-f19824-201910-en.pdf
+- http://www.projectatomic.io/docs/docker-image-author-guidance/
 
 #### dockerfile : Entrypoints + CMDs + Signals and processes
 - https://stackoverflow.com/questions/39082768/what-does-set-e-and-exec-do-for-docker-entrypoint-scripts
@@ -46,3 +48,18 @@
 - https://stackoverflow.com/questions/14779104/mysql-how-to-allow-remote-connection-to-mysql
 - https://success.mirantis.com/article/use-a-script-to-initialize-stateful-container-data
 - https://unix.stackexchange.com/questions/265149/why-is-set-o-errexit-breaking-this-read-heredoc-expression/265151
+
+#### pod : php + nginx
+- https://medium.com/@marekbartik/autoscale-nginx-and-php-fpm-independently-on-google-kubernetes-engine-290aead64f7f
+- https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture
+- https://cloud.google.com/kubernetes-engine/docs/tutorials/persistent-disk
+- https://github.com/kubernetes/examples
+- https://cloud.google.com/endpoints/docs/openapi/custom-nginx
+- https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
+- https://www.nginx.com/resources/wiki/start/topics/recipes/wordpress/
+## configmap and volume to avoid custom image
+- https://cloud.google.com/endpoints/docs/openapi/custom-nginx
+- https://stackoverflow.com/questions/64178370/custom-nginx-conf-from-configmap-in-kubernetes
+- https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#populate-a-volume-with-data-stored-in-a-configmap
+- https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#populate-a-volume-with-data-stored-in-a-configmap
+- https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#add-configmap-data-to-a-specific-path-in-the-volume

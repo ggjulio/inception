@@ -3,6 +3,7 @@ kind: Service
 metadata:
   labels:
     app: my-nginx
+    env: learning
   name: my-nginx
 spec:
   type: LoadBalancer
@@ -22,6 +23,7 @@ kind: Deployment
 metadata:
   labels:
     app: my-nginx
+    env: learning
   name: my-nginx
 spec:
   replicas: 1
@@ -32,6 +34,7 @@ spec:
     metadata:
       labels:
         app: my-nginx
+        env: learning
     spec:
       containers:
       - name: my-nginx
