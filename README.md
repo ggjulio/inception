@@ -57,9 +57,11 @@
 - https://cloud.google.com/endpoints/docs/openapi/custom-nginx
 - https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
 - https://www.nginx.com/resources/wiki/start/topics/recipes/wordpress/
+- https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
 ## configmap and volume to avoid custom image
 - https://cloud.google.com/endpoints/docs/openapi/custom-nginx
 - https://stackoverflow.com/questions/64178370/custom-nginx-conf-from-configmap-in-kubernetes
 - https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#populate-a-volume-with-data-stored-in-a-configmap
 - https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#populate-a-volume-with-data-stored-in-a-configmap
 - https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#add-configmap-data-to-a-specific-path-in-the-volume
+- https://unofficial-kubernetes.readthedocs.io/en/latest/tasks/configure-pod-container/configmap/

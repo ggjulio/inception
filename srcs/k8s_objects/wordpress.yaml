@@ -16,7 +16,19 @@ spec:
       targetPort: 443
   selector:
     app: wordpress
-
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wp-pv-claim
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,15 +41,18 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-nginx
+      app: wordpress
   template:
     metadata:
       labels:
-        app: my-nginx
+        app: wordpress
         env: learning
     spec:
       volumes:
         - name: nginx-config
+          configMap:
+              name: nginx-config
+        - name: www-app-wordpress
           configMap:
               name: nginx-config
       shareProcessNamespace: true
