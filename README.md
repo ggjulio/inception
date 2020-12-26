@@ -16,8 +16,13 @@
 
 - https://github.com/kelseyhightower/kubernetes-the-hard-way
 
+#### metallb
+
 - https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
 - https://medium.com/@shoaib_masood/metallb-network-loadbalancer-minikube-335d846dfdbe  
+- https://metallb.universe.tf/installation/
+
+#### other
 - https://www.redhat.com/cms/managed-files/cm-oreilly-kubernetes-patterns-ebook-f19824-201910-en.pdf
 - http://www.projectatomic.io/docs/docker-image-author-guidance/
 
