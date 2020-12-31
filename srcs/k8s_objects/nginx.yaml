@@ -4,6 +4,8 @@ metadata:
   labels:
     app: my-nginx
     env: learning
+#  annotations:
+#    metallb.universe.tf/allow-shared-ip: "true"
   name: my-nginx
 spec:
   type: LoadBalancer

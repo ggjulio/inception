@@ -1,26 +1,41 @@
 #!/usr/bin/bash
 
-minikube start --vm-driver=docker --cpus=2 --memory=3900
+set -euxo pipefail
 
+###################### CLEAN VM #############################
+eval $(minikube docker-env --unset)                         #
+minikube delete                                             #
+docker network prune --force                                # 
+#############################################################
+
+
+minikube start --vm-driver=docker
 minikube addons enable metrics-server
-minikube addons enable metallb
 minikube addons enable dashboard
 
-IP=$(minikube ip)
+
+#############################################################
+######## build images inside minikube  container ############
 eval $(minikube docker-env)
-
-echo "nginx"
 docker build -t my-nginx srcs/images/nginx/ > /dev/null
-echo "mysql"
 docker build -t my-mysql srcs/images/mysql/ > /dev/null
-echo "fpm"
 docker build -t my-php-fpm srcs/images/php-fpm/ > /dev/null
-echo "done images"
+eval $(minikube docker-env --unset)
 
+#############################################################
+########### set up metallb and networking ###################
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml > /dev/null
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml > /dev/null
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)" > /dev/null
 kubectl apply --filename srcs/k8s_objects/configMap-metallb.yaml
+# Create a network for externals ip
+docker network create --subnet=172.20.0.0/16 my-net
+docker network connect my-net minikube
+
+
 kubectl apply --filename srcs/k8s_objects/nginx.yaml
+kubectl apply --filename srcs/k8s_objects/wordpress.yaml
 #kubectl apply --filename srcs/k8s_objects/
 
-# minikube dashboard
+minikube dashboard
 
-printf "cluster ip : %s" $IP

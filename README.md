@@ -70,3 +70,22 @@
 - https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#populate-a-volume-with-data-stored-in-a-configmap
 - https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#add-configmap-data-to-a-specific-path-in-the-volume
 - https://unofficial-kubernetes.readthedocs.io/en/latest/tasks/configure-pod-container/configmap/
+
+## Using docker driver, create a network for metallb
+
+warning: if u have run `eval $(minikube docker-env)`. All commands will not be executed in the host...(check with `docker ps`...) -> `eval $(minikube docker-env --unset)`
+#### docker network
+- check network that already exist `Docker network ls`
+If u already started you should see a network called `minikube`. The minikube ip is on this network.
+https://docs.docker.com/network/
+
+- Create a new network for setting up externals ip for your settings.
+`docker network create my-network --driver=bridge`
+`docker network inspect my-network`
+`IPAM.Config.Subnet` is the subnet you should use inside your metallb config.
+- connect this network to the minikube container:
+`docker network connect my-network minikube` (`minikube` == alias to minikube container ->`docker ps`)
+`docker network inspect my-network` -> the minikube container should be added...
+
+- Configure metallb
+My `IPAM.Config.Subnet`<!--  -->is`172.18.0.0/16` so I given range `.0.10`-`0.20` to metallb
