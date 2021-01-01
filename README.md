@@ -70,6 +70,7 @@
 - https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#populate-a-volume-with-data-stored-in-a-configmap
 - https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#add-configmap-data-to-a-specific-path-in-the-volume
 - https://unofficial-kubernetes.readthedocs.io/en/latest/tasks/configure-pod-container/configmap/
+- https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/
 
 ## Using docker driver, create a network for metallb
 
