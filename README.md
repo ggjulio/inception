@@ -70,8 +70,9 @@
 - https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#populate-a-volume-with-data-stored-in-a-configmap
 - https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#add-configmap-data-to-a-specific-path-in-the-volume
 - https://unofficial-kubernetes.readthedocs.io/en/latest/tasks/configure-pod-container/configmap/
-- https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/
-
+- > https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/
+- https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+- https://docs.openshift.com/container-platform/4.1/nodes/containers/nodes-containers-init.html
 ## Using docker driver, create a network for metallb
 
 warning: if u have run `eval $(minikube docker-env)`. All commands will not be executed in the host...(check with `docker ps`...) -> `eval $(minikube docker-env --unset)`

@@ -2,7 +2,7 @@ FROM alpine:3.11
 LABEL maintainer="Julio <juligonz@student.42.fr>" 
 
 RUN set -eux; \
-	apk add --no-cache php7-fpm; \
+	apk add --no-cache php7-fpm php7-mysqli php7-json; \
 	echo -e "\n; Custom Config for ft_services\n\
 [global]															\n\
 daemonize = no														\n\
