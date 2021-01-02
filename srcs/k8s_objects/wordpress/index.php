@@ -9,5 +9,7 @@
 		<iframe width="500" height="340" src="https://www.youtube.com/embed/8XvJZezRJbA?start=0&autoplay=1">
 		</iframe>
 	</body>
+			<?php phpinfo(); ?>
+
 </html>
 	
