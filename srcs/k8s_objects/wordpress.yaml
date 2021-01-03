@@ -76,8 +76,6 @@ spec:
               name: wordpress-config
         - name: workdir
           emptyDir: {}
-          # persistentVolumeClaim:
-          #     claimName: wp-pvc
       shareProcessNamespace: true
       containers:
         - name: nginx
@@ -142,8 +140,6 @@ data:
 
         root /var/www/app;
         index index.php index.html;
-
-        #server_name localhost;
 
         location / {
                   autoindex off;

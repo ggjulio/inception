@@ -21,7 +21,6 @@ catch_workers_output = yes											\n\
 decorate_workers_output = no										\n\
 " >> /etc/php7/php-fpm.conf ;
 
-# add cgi.fix_pathinfo = 0; in php.ini
 EXPOSE 9000
 
 CMD ["php-fpm7"]
