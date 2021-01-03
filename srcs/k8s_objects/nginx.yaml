@@ -38,6 +38,10 @@ spec:
         app: nginx
         env: learning
     spec:
+      volumes:
+        - name: nginx-config
+          configMap:
+              name: nginx-config
       containers:
       - name: nginx
         image: my-nginx
@@ -47,3 +51,49 @@ spec:
           name : http
         - containerPort: 443
           name : https
+        volumeMounts:
+          - mountPath: /etc/nginx/conf.d/
+            name: nginx-config
+            readOnly: true
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  labels:
+    app: nginx
+    env: learning 
+data:
+  default.conf: |
+    server {
+        listen 80 default_server;   #to listen on 80 in ipv4
+        listen [::]:80 default_server;   #to listen on 80 in ipv6
+        return 301 https://$host$request_uri; #redirect http -> https
+    }
+
+    server {
+        listen 443 ssl http2;
+        listen [::]:443 ssl http2;
+
+        ssl_certificate      /etc/ssl/certs/nginx-selfsigned.crt;
+        ssl_certificate_key  /etc/ssl/private/nginx-selfsigned.key;
+        ssl_protocols        SSLv3 TLSv1.3;
+        ssl_ciphers          HIGH:!aNULL:!MD5;
+
+        error_page		497	https://$host:443$request_uri;   #redirect  when 400 code error
+
+        root /var/www/app;
+        index index.html;
+
+        location / {
+            autoindex off;
+        }
+
+        location /wordpress {
+            return 307 https://$host:5050;
+        }
+
+        location /phpmyadmin {
+            proxy_pass https://$host:5000;
+        }
+    }
