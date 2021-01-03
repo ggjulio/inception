@@ -35,6 +35,7 @@ docker network connect my-net minikube
 
 kubectl apply --filename srcs/k8s_objects/nginx.yaml
 kubectl apply --filename srcs/k8s_objects/wordpress.yaml
+kubectl apply --filename srcs/k8s_objects/mysql.yaml
 #kubectl apply --filename srcs/k8s_objects/
 
 minikube dashboard

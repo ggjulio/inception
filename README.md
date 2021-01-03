@@ -72,7 +72,7 @@
 - https://unofficial-kubernetes.readthedocs.io/en/latest/tasks/configure-pod-container/configmap/
 - > https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/
 - https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
-- https://docs.openshift.com/container-platform/4.1/nodes/containers/nodes-containers-init.html
+- https://medium.com/hackernoon/mount-file-to-kubernetes-pod-without-deleting-the-existing-file-in-the-docker-container-in-the-88b5d11661a6
 ## Using docker driver, create a network for metallb
 
 warning: if u have run `eval $(minikube docker-env)`. All commands will not be executed in the host...(check with `docker ps`...) -> `eval $(minikube docker-env --unset)`
@@ -90,4 +90,18 @@ https://docs.docker.com/network/
 `docker network inspect my-network` -> the minikube container should be added...
 
 - Configure metallb
-My `IPAM.Config.Subnet`<!--  -->is`172.18.0.0/16` so I given range `.0.10`-`0.20` to metallb
+My `IPAM.Config.Subnet`is`172.18.0.0/16` so I given range `.0.10`-`0.20` to metallb
+
+Instead of all this steps. We can choose ourself the subnet:
+```bash
+docker network create --subnet=172.20.0.0/16 my-net
+docker network connect my-net minikube
+```
+
+#### Persistent storage
+- https://docs.openshift.com/container-platform/4.1/storage/understanding-persistent-storage.html#persistent-storage-overview_understanding-persistent-storage
+- https://docs.openshift.com/container-platform/4.1/nodes/containers/nodes-containers-volumes.html#nodes-containers-volumes-subpath_nodes-containers-
+
+#### defployment strategy
+- https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+- https://docs.openshift.com/container-platform/3.3/dev_guide/deployments/deployment_strategies.html
