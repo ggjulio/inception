@@ -53,6 +53,7 @@
 - https://stackoverflow.com/questions/14779104/mysql-how-to-allow-remote-connection-to-mysql
 - https://success.mirantis.com/article/use-a-script-to-initialize-stateful-container-data
 - https://unix.stackexchange.com/questions/265149/why-is-set-o-errexit-breaking-this-read-heredoc-expression/265151
+- https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
 
 #### pod : php + nginx
 - https://medium.com/@marekbartik/autoscale-nginx-and-php-fpm-independently-on-google-kubernetes-engine-290aead64f7f
@@ -105,3 +106,4 @@ docker network connect my-net minikube
 #### defployment strategy
 - https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
 - https://docs.openshift.com/container-platform/3.3/dev_guide/deployments/deployment_strategies.html
+- https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
