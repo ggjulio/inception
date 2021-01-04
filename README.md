@@ -55,6 +55,16 @@
 - https://unix.stackexchange.com/questions/265149/why-is-set-o-errexit-breaking-this-read-heredoc-expression/265151
 - https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
 
+#### phpmyadmin
+- https://www.nginx.com/resources/wiki/start/topics/examples/likeapache/
+- https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
+- https://serverfault.com/questions/379675/nginx-reverse-proxy-url-rewrite?rq=1
+- https://stackoverflow.com/questions/54700282/nginx-reverse-proxying-to-https-upstream-getting-502-bad-gateway
+
+http2 not supported by nginx as backend server (for reverse proxy)
+- https://serverfault.com/questions/765258/use-http-2-0-between-nginx-reverse-proxy-and-backend-webserver
+
+- https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/
 #### pod : php + nginx
 - https://medium.com/@marekbartik/autoscale-nginx-and-php-fpm-independently-on-google-kubernetes-engine-290aead64f7f
 - https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture
@@ -107,3 +117,9 @@ docker network connect my-net minikube
 - https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
 - https://docs.openshift.com/container-platform/3.3/dev_guide/deployments/deployment_strategies.html
 - https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
+
+#### service networking and network beyond cluster
+- https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
+- https://metallb.universe.tf/concepts/
+- https://metallb.universe.tf/concepts/layer2/
+- https://metallb.universe.tf/concepts/bgp/
