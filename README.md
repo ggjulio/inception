@@ -123,3 +123,5 @@ docker network connect my-net minikube
 - https://metallb.universe.tf/concepts/
 - https://metallb.universe.tf/concepts/layer2/
 - https://metallb.universe.tf/concepts/bgp/
+
+- https://kubernetes.io/docs/concepts/services-networking/ingress/

@@ -57,7 +57,7 @@ spec:
         - name: workdir-persistent-storage
           persistentVolumeClaim:
               claimName: wp-pv-claim
-      shareProcessNamespace: true
+#      shareProcessNamespace: true
       containers:
         - name: nginx
           image: my-nginx
@@ -110,7 +110,7 @@ data:
   default.conf: |
     # Upstream to abstract backend connection(s) for php
     upstream php {
-        server unix:/tmp/php-cgi.socket;
+        # server unix:/tmp/php-cgi.socket;
         server 127.0.0.1:9000;
     }
 
