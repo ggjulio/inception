@@ -6,7 +6,7 @@ metadata:
     app: wordpress
     env: learning
   annotations:
-    metallb.universe.tf/allow-shared-ip: "true"
+    metallb.universe.tf/allow-shared-ip: "ft_services"
 spec:
   type: LoadBalancer
   ports:
@@ -129,7 +129,8 @@ data:
         index index.php index.html;
 
         location / {
-                  autoindex off;
+                  # autoindex off;
+                  # try_files $uri $uri/ /index.php?$args;
         }
 
         location ~ \.php$ {

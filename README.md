@@ -65,6 +65,8 @@ http2 not supported by nginx as backend server (for reverse proxy)
 - https://serverfault.com/questions/765258/use-http-2-0-between-nginx-reverse-proxy-and-backend-webserver
 
 - https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/
+- https://stackoverflow.com/questions/24520540/nginx-does-redirect-not-proxy
+- https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy 
 #### pod : php + nginx
 - https://medium.com/@marekbartik/autoscale-nginx-and-php-fpm-independently-on-google-kubernetes-engine-290aead64f7f
 - https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture
@@ -125,3 +127,4 @@ docker network connect my-net minikube
 - https://metallb.universe.tf/concepts/bgp/
 
 - https://kubernetes.io/docs/concepts/services-networking/ingress/
+- https://www.stackrox.com/post/2020/01/kubernetes-networking-demystified/
