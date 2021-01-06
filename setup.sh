@@ -21,6 +21,7 @@ docker build -t my-nginx srcs/images/nginx/ > /dev/null
 docker build -t my-mysql srcs/images/mysql/ > /dev/null
 docker build -t my-php-fpm srcs/images/php-fpm/ > /dev/null
 docker build -t my-influxdb srcs/images/influxdb > /dev/null
+docker build -t my-grafana srcs/images/grafana > /dev/null
 eval $(minikube docker-env --unset)
 
 #############################################################
