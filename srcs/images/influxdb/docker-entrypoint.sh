@@ -5,7 +5,6 @@ set -e
 export	DATADIR=/var/lib/influxdb
 export	META_DIR=$DATADIR/meta
 
-
 BOLD="\e[1m"
 RESET="\e[0m"
 LIGHT_RED="\e[91m"
@@ -66,7 +65,7 @@ setup_db(){
 }
 
 
-# if [ "$1" = "influxd" ]; then
+if [ "$1" = "influxd" ]; then
 	log_info "Entrypoint script for influxdb server started..."
 	if [ -z "$INFLUXDB_DB" -o -z "$INFLUXDB_ADMIN_USER" -o -z "$INFLUXDB_ADMIN_PASSWORD" -o -z "$INFLUXDB_USER" -o -z "$INFLUXDB_USER_PASSWORD" ]; then
 		log_error "Missing one of theses environment variables :\n\tINFLUXDB_DB\n\tINFLUXDB_ADMIN_USER\n\tINFLUXDB_ADMIN_PASSWORD\n\tINFLUXDB_USER\n\tINFLUXDB_USER_PASSWORD"
@@ -82,6 +81,5 @@ setup_db(){
 		log_info 'Skipping initialization. Influxdb database already created.'
 	fi
 	log_info 'Ready for startup\n'
-# fi
-# exec "$@"
-sh
+fi
+exec "$@"

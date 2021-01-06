@@ -15,5 +15,4 @@ COPY docker-entrypoint.sh /usr/local/bin
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 8086 8088     2003 4242 8089 25826
-CMD ["sh"]
-# CMD ["influxd"]
+CMD ["influxd"]
