@@ -116,8 +116,7 @@ data:
         index index.php index.html;
 
         location / {
-                  #autoindex off;
-                  # try_files $uri $uri/ =404;
+                  try_files $uri $uri/ =404;
         }
 
         location ~ \.php$ {
@@ -125,7 +124,7 @@ data:
                   include fastcgi_params;
                   fastcgi_intercept_errors on;
                   fastcgi_pass php;
-                    fastcgi_split_path_info ^(/phpmyadmin)(/.*)$;
+                    # fastcgi_split_path_info ^(/phpmyadmin)(/.*)$;
                     # The following parameter can be also included in fastcgi_params file
                   fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
                   fastcgi_param QUERY_STRING    $query_string;
