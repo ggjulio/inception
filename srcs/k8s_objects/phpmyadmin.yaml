@@ -43,7 +43,6 @@ spec:
               name: phpmyadmin-config
         - name: workdir
           emptyDir: {}
-#      shareProcessNamespace: true
       containers:
         - name: nginx
           image: my-nginx
@@ -104,11 +103,8 @@ data:
         # ssl on;
         ssl_certificate      /etc/ssl/certs/nginx-selfsigned.crt;
         ssl_certificate_key  /etc/ssl/private/nginx-selfsigned.key;
-        # ssl_protocols        SSLv3 TLSv1.3;
-        # ssl_ciphers          HIGH:!aNULL:!MD5;
-        
-        # ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
-        # ssl_ciphers          HIGH:!aNULL:!MD5;
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers          HIGH:!aNULL:!MD5;
         
         error_page		497	https://$host:5000$request_uri;   #redirect  when 400 code error
 
@@ -120,15 +116,10 @@ data:
         }
 
         location ~ \.php$ {
-                    # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
                   include fastcgi_params;
                   fastcgi_intercept_errors on;
                   fastcgi_pass php;
-                    # fastcgi_split_path_info ^(/phpmyadmin)(/.*)$;
-                    # The following parameter can be also included in fastcgi_params file
                   fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
-                  fastcgi_param QUERY_STRING    $query_string;
-
         }
 
     }

@@ -57,7 +57,6 @@ spec:
         - name: workdir-persistent-storage
           persistentVolumeClaim:
               claimName: wp-pv-claim
-#      shareProcessNamespace: true
       containers:
         - name: nginx
           image: my-nginx
@@ -129,17 +128,14 @@ data:
         index index.php index.html;
 
         location / {
-                  # autoindex off;
-                  # try_files $uri $uri/ /index.php?$args;
+          try_files $uri $uri/ =404;
         }
 
         location ~ \.php$ {
-                  # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
-                  include fastcgi_params;
-                  fastcgi_intercept_errors on;
-                  fastcgi_pass php;
-                  # The following parameter can be also included in fastcgi_params file
-                  fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+          include fastcgi_params;
+          fastcgi_intercept_errors on;
+          fastcgi_pass php;
+          fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
 
     }
