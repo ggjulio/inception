@@ -69,3 +69,15 @@ spec:
         volumeMounts:
         - name: influxdb-persistent-storage
           mountPath: /var/lib/influxdb
+---
+kind: Secret  
+metadata:  
+  name: influxdb-secrets  
+type: Opaque  
+data:  
+  INFLUXDB_CONFIG_PATH: /etc/influxdb/influxdb.conf  
+  INFLUXDB_ADMIN_USER: groot  
+  INFLUXDB_ADMIN_PASSWORD: icantstopthisfeelingdeepinsideofme  
+  INFLUXDB_DB: ft_services
+  INFLUXDB_USER: grafana  
+  INFLUXDB_USER_PASSWORD: grafana

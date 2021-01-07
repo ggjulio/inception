@@ -6,8 +6,10 @@ set -euxo pipefail
 eval $(minikube docker-env --unset)                         #
 minikube delete                                             #
 docker network prune --force                                # 
+if [ "${1-0}" = "delete" -o "${1-0}" = "clean" ]; then		#
+	exit 0;													#
+fi															#
 #############################################################
-
 
 minikube start --vm-driver=docker
 minikube addons enable metrics-server
@@ -22,6 +24,7 @@ docker build -t my-mysql srcs/images/mysql/ > /dev/null
 docker build -t my-php-fpm srcs/images/php-fpm/ > /dev/null
 docker build -t my-influxdb srcs/images/influxdb > /dev/null
 docker build -t my-grafana srcs/images/grafana > /dev/null
+docker build -t my-telegraf srcs/images/telegraf > /dev/null
 eval $(minikube docker-env --unset)
 
 #############################################################
@@ -39,6 +42,9 @@ kubectl apply --filename srcs/k8s_objects/mysql.yaml
 kubectl apply --filename srcs/k8s_objects/nginx.yaml
 kubectl apply --filename srcs/k8s_objects/wordpress.yaml
 kubectl apply --filename srcs/k8s_objects/phpmyadmin.yaml
+kubectl apply --filename srcs/k8s_objects/influxdb.yaml
+kubectl apply --filename srcs/k8s_objects/grafana.yaml
+kubectl apply --filename srcs/k8s_objects/telegrafDaemonSet.yaml
 #kubectl apply --filename srcs/k8s_objects/
 
 minikube dashboard
