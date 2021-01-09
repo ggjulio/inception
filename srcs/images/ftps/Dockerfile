@@ -11,7 +11,7 @@ RUN apk add --no-cache vsftpd openssl \
 	&& apk del openssl 
 	# && ln -sf /dev/stdout /var/log/vsftpd.log 
 
-EXPOSE 21 20 64000-64321
+EXPOSE 21 20 20000-20002
 
 COPY vsftpd.conf /etc/vsftpd.conf
 COPY docker-entrypoint.sh /usr/local/bin
