@@ -25,6 +25,7 @@ docker build -t my-php-fpm srcs/images/php-fpm/ > /dev/null
 docker build -t my-influxdb srcs/images/influxdb > /dev/null
 docker build -t my-grafana srcs/images/grafana > /dev/null
 docker build -t my-telegraf srcs/images/telegraf > /dev/null
+docker build -t my-ftps srcs/images/ftps > /dev/null
 eval $(minikube docker-env --unset)
 
 #############################################################
@@ -45,6 +46,7 @@ kubectl apply --filename srcs/k8s_objects/phpmyadmin.yaml
 kubectl apply --filename srcs/k8s_objects/influxdb.yaml
 kubectl apply --filename srcs/k8s_objects/grafana.yaml
 kubectl apply --filename srcs/k8s_objects/telegrafDaemonSet.yaml
+kubectl apply --filename srcs/k8s_objects/ftps.yaml
 #kubectl apply --filename srcs/k8s_objects/
 
 minikube dashboard

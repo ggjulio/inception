@@ -121,5 +121,4 @@ data:
             proxy_set_header X-Forwarded-Proto https;
             proxy_pass https://phpmyadmin:5000/;
         }
-
     }
