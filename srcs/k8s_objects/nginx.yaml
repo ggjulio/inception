@@ -45,6 +45,8 @@ spec:
         - name: telegraf-nginx-configmap
           configMap:
               name: telegraf-nginx-configmap
+        - name: nginx-logs
+          emptyDir: {}
       containers:
       - name: nginx
         image: my-nginx
@@ -62,6 +64,8 @@ spec:
           - mountPath: /etc/nginx/conf.d/
             name: nginx-config
             readOnly: true
+          - mountPath: /var/log/nginx/
+            name: nginx-logs
 
       - name: telegraf
         image: my-telegraf
@@ -87,6 +91,9 @@ spec:
         volumeMounts:
         - name: telegraf-nginx-configmap
           mountPath: /etc/telegraf
+        - mountPath: /var/log/nginx/
+          name: nginx-logs
+          readOnly: true
 
 ---
 apiVersion: v1
@@ -172,11 +179,11 @@ data:
       password = "${MONITOR_PASSWORD}"
       timeout = "5s"
       
-    ##################### INPUT ###########################
+    ##################### INPUTS ##########################
     # Read Nginx's basic status information (ngx_http_stub_status_module)
     [[inputs.nginx]]
     ## An array of Nginx stub_status URI to gather stats.
-    urls = ["http://127.0.0.1/nginx_status"]
+      urls = ["http://127.0.0.1/nginx_status"]
 
     ## Optional TLS Config
     # tls_ca = "/etc/telegraf/ca.pem"
@@ -186,4 +193,16 @@ data:
     # insecure_skip_verify = false
 
     ## HTTP response timeout (default: 5s)
-    response_timeout = "5s"
+      response_timeout = "5s"
+    
+
+    # Collect nginx access logs
+    [[inputs.tail]]
+      files = ["/var/log/nginx/access.log"] 
+      from_beginning = false
+      ## Whether file is a named pipe
+      pipe = false
+      name_prefix = "nginx_access_logs."
+
+      data_format = "grok"
+      grok_patterns = ["%{COMBINED_LOG_FORMAT}"]

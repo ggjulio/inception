@@ -128,3 +128,7 @@ docker network connect my-net minikube
 
 - https://kubernetes.io/docs/concepts/services-networking/ingress/
 - https://www.stackrox.com/post/2020/01/kubernetes-networking-demystified/
+
+# nginx telegraf logs
+https://docs.wavefront.com/nginx.html
+https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md

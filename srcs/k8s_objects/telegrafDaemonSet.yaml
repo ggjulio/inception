@@ -1,75 +1,3 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: telegraf-daemon-set
-  namespace: default
-  labels:
-    app: telegraf
-data:
-  telegraf.conf: |
-    [global_tags]
-      project = "ft_services"
-    [agent]
-      hostname = "${HOSTNAME}"
-      debug = true
-      quiet = false
-    #################### OUTPUT ###########################
-    [[outputs.influxdb]]
-      urls = ["${MONITOR_HOST}"]
-      database = "${MONITOR_DATABASE}" 
-      username = "${MONITOR_USERNAME}"
-      password = "${MONITOR_PASSWORD}"
-      timeout = "5s"
-      
-    ##################### INPUT ###########################
-    [[inputs.cpu]]
-      percpu = false
-      totalcpu = true
-      collect_cpu_time = false
-      report_active = false
-    [[inputs.disk]]
-      ignore_fs = ["tmpfs", "devtmpfs", "devfs"]
-    [[inputs.diskio]]
-    # [[inputs.kernel]]
-    [[inputs.mem]]
-    [[inputs.processes]]
-    # [[inputs.swap]]
-    [[inputs.system]]
-    # [[inputs.docker]]
-    #   endpoint = "unix:///var/run/docker.sock"
-    [[inputs.kubernetes]]
-      # curl -s https://kubernetes/api/v1/namespaces/default/pods/$HOSTNAME --header "Authorization: Bearer $TOKEN" --insecure
-      # ^ to find url...
-      ## URL for the kubelet
-      url = "https://kubernetes:443"
-      # url = "https://kubernetes.default.svc.cluster.local/api/v1/nodes/$HOSTNAME/proxy"
-      bearer_token = "/var/run/secrets/kubernetes.io/serviceaccount/token"
-      insecure_skip_verify = true
-
-      ## Use bearer token for authorization. ('bearer_token' takes priority)
-      ## If both of these are empty, we'll use the default serviceaccount:
-      ## at: /run/secrets/kubernetes.io/serviceaccount/token
-      # bearer_token = "/path/to/bearer/token"
-      ## OR
-      # bearer_token_string = "abc_123"
-
-      ## Pod labels to be added as tags.  An empty array for both include and
-      ## exclude will include all labels.
-      # label_include = []
-      # label_exclude = ["*"]
-
-      ## Set response_timeout (default 5 seconds)
-      # response_timeout = "5s"
-
-      ## Optional TLS Config
-      # tls_ca = /path/to/cafile
-      # tls_cert = /path/to/certfile
-      # tls_key = /path/to/keyfile
-      ## Use TLS but skip chain & host verification
-      # insecure_skip_verify = true
-      
-
----
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -147,28 +75,44 @@ spec:
         - name: config
           mountPath: /etc/telegraf
 ---
-# kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: influx:stats:viewer
+  name: telegraf-daemon-set
   namespace: default
   labels:
-    rbac.authorization.k8s.io/aggregate-view-telegraf-stats: "true"
-rules:
-  - apiGroups: ["*"]
-    resources: ["*"]
-    verbs: ["get", "watch", "list"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: shit
-subjects:
-- kind: ServiceAccount
-  name: default
-  namespace: default
-roleRef:
-  kind: Role
-  name: deployments-and-deployements-scale
-  apiGroup: ""
+    app: telegraf
+data:
+  telegraf.conf: |
+    [global_tags]
+      project = "ft_services"
+    [agent]
+      hostname = "${HOSTNAME}"
+      debug = true
+      quiet = false
+    #################### OUTPUT ###########################
+    [[outputs.influxdb]]
+      urls = ["${MONITOR_HOST}"]
+      database = "${MONITOR_DATABASE}" 
+      username = "${MONITOR_USERNAME}"
+      password = "${MONITOR_PASSWORD}"
+      timeout = "5s"
+      
+    ##################### INPUT ###########################
+    [[inputs.cpu]]
+      percpu = false
+      totalcpu = true
+      collect_cpu_time = false
+      report_active = false
+      fielddrop = ["usage_irq","cpu","host","project","usage_steal","usage_guest","usage_gest_nice","usage_nice"]
+    [[inputs.disk]]
+      ignore_fs = ["tmpfs", "devtmpfs", "devfs"]
+    [[inputs.diskio]]
+    [[inputs.kernel]]
+    [[inputs.mem]]
+    [[inputs.processes]]
+    [[inputs.swap]]
+    [[inputs.system]]
+    # [[inputs.docker]]
+      # endpoint = "unix:///var/run/docker.sock"
+      
