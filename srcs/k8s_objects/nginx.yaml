@@ -42,9 +42,9 @@ spec:
         - name: nginx-config
           configMap:
               name: nginx-config
-        - name: telegraf-config
+        - name: telegraf-nginx-configmap
           configMap:
-              name: telegraf-config
+              name: telegraf-nginx-configmap
       containers:
       - name: nginx
         image: my-nginx
@@ -62,6 +62,32 @@ spec:
           - mountPath: /etc/nginx/conf.d/
             name: nginx-config
             readOnly: true
+
+      - name: telegraf
+        image: my-telegraf
+        imagePullPolicy: Never
+        env:
+        - name: MONITOR_HOST
+          value: http://influxdb:8086
+        - name: MONITOR_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-secrets
+              key: INFLUXDB_USER
+        - name: MONITOR_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-secrets
+              key: INFLUXDB_USER_PASSWORD
+        - name: MONITOR_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-secrets
+              key: INFLUXDB_DB
+        volumeMounts:
+        - name: telegraf-nginx-configmap
+          mountPath: /etc/telegraf
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -122,3 +148,42 @@ data:
             proxy_pass https://phpmyadmin:5000/;
         }
     }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telegraf-nginx-configmap
+  labels:
+    app: nginx
+    env: learning
+data:
+  telegraf.conf: |
+    [global_tags]
+      project = "ft_services"
+    [agent]
+      hostname = "${HOSTNAME}"
+      # debug = true
+      # quiet = false
+    #################### OUTPUT ###########################
+    [[outputs.influxdb]]
+      urls = ["${MONITOR_HOST}"]
+      database = "${MONITOR_DATABASE}" 
+      username = "${MONITOR_USERNAME}"
+      password = "${MONITOR_PASSWORD}"
+      timeout = "5s"
+      
+    ##################### INPUT ###########################
+    # Read Nginx's basic status information (ngx_http_stub_status_module)
+    [[inputs.nginx]]
+    ## An array of Nginx stub_status URI to gather stats.
+    urls = ["http://127.0.0.1/nginx_status"]
+
+    ## Optional TLS Config
+    # tls_ca = "/etc/telegraf/ca.pem"
+    # tls_cert = "/etc/telegraf/cert.pem"
+    # tls_key = "/etc/telegraf/key.pem"
+    ## Use TLS but skip chain & host verification
+    # insecure_skip_verify = false
+
+    ## HTTP response timeout (default: 5s)
+    response_timeout = "5s"

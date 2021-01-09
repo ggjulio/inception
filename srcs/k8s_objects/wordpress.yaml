@@ -73,6 +73,22 @@ spec:
         - name: php-fpm
           image: my-php-fpm
           imagePullPolicy: Never
+          env:
+          - name: MYSQL_DATABASE
+            valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: MYSQL_DATABASE
+          - name: MYSQL_USER
+            valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: MYSQL_USER
+          - name: MYSQL_PASSWORD
+            valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: MYSQL_PASSWORD
           ports:
           - containerPort: 9000
             name : tcp
@@ -171,13 +187,14 @@ data:
 
     // ** MySQL settings - You can get this info from your web host ** //
     /** The name of the database for WordPress */
-    define( 'DB_NAME', 'wordpress' );
+    # define( 'DB_NAME', 'wordpress' );
+    define( 'DB_NAME', getenv('MYSQL_DATABASE'));
 
     /** MySQL database username */
-    define( 'DB_USER', 'wordpress' );
+    define( 'DB_USER',  getenv('MYSQL_USER'));
 
     /** MySQL database password */
-    define( 'DB_PASSWORD', 'wordpress' );
+    define( 'DB_PASSWORD',  getenv('MYSQL_PASSWORD'));
 
     /** MySQL hostname */
     define( 'DB_HOST', 'mysql' );

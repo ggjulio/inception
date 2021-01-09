@@ -54,17 +54,12 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 3306
+        envFrom:
+          - secretRef:
+              name: mysql-secrets
         env:
           - name: MYSQL_GROOT_HOST
             value: '172.%'
-          - name: MYSQL_GROOT_PASSWORD
-            value: 'icantstopthisfeelingdeepinsideofme'
-          - name: MYSQL_DATABASE
-            value: 'wordpress'
-          - name: MYSQL_USER
-            value: 'wordpress'
-          - name: MYSQL_PASSWORD
-            value: 'wordpress'
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql

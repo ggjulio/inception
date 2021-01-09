@@ -8,6 +8,8 @@ RUN mkdir -p /grafana \
 	&& wget -q -O - https://dl.grafana.com/oss/release/grafana-7.3.6.linux-amd64.tar.gz \
 			| tar -xz -C grafana --strip-components=1
 
+COPY data/ /grafana/data
+
 EXPOSE 3000
 
 CMD ["grafana-server", "-homepath=/grafana"]

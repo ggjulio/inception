@@ -39,6 +39,7 @@ docker network create --subnet=172.20.0.0/16 my-net
 docker network connect my-net minikube
 
 
+kubectl apply --filename srcs/k8s_objects/secrets.yaml
 kubectl apply --filename srcs/k8s_objects/nginx.yaml
 kubectl apply --filename srcs/k8s_objects/mysql.yaml
 kubectl apply --filename srcs/k8s_objects/wordpress.yaml

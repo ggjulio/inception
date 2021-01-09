@@ -77,9 +77,15 @@ spec:
         args: ['vsftpd', '/custom_config/vsftpd.conf']
         env:
         - name: USER
-          value: 'ftps'
+          valueFrom:
+            secretKeyRef:
+              name: ftps-secrets
+              key: USER
         - name: PASSWORD
-          value: 'ftps'
+          valueFrom:
+            secretKeyRef:
+              name: ftps-secrets
+              key: PASSWORD
         ports:
         - containerPort: 21
           name : ftp
