@@ -101,29 +101,28 @@ data:
       database = "${MONITOR_DATABASE}" 
       username = "${MONITOR_USERNAME}"
       password = "${MONITOR_PASSWORD}"
-      # timeout = "5s"
+      timeout = "5s"
       
     ##################### INPUT ###########################
-    # [[inputs.cpu]]
-    #   percpu = false
-    #   totalcpu = true
-    #   collect_cpu_time = false
-    #   report_active = false
-    #   fielddrop = ["usage_irq","cpu","host","project","usage_steal","usage_guest","usage_gest_nice","usage_nice"]
-    # [[inputs.disk]]
-    #   ignore_fs = ["tmpfs", "devtmpfs", "devfs"]
-    # [[inputs.diskio]]
-    # [[inputs.kernel]]
-    # [[inputs.mem]]
-    # [[inputs.processes]]
-    # [[inputs.swap]]
-    # [[inputs.system]]
+    [[inputs.cpu]]
+      percpu = true
+      totalcpu = true
+      collect_cpu_time = false
+      report_active = false
+      # fielddrop = ["usage_irq","cpu","host","project","usage_steal","usage_guest","usage_gest_nice","usage_nice"]
+    [[inputs.disk]]
+      ignore_fs = ["tmpfs", "devtmpfs", "devfs"]
+    [[inputs.diskio]]
+    [[inputs.kernel]]
+    [[inputs.mem]]
+    [[inputs.processes]]
+    [[inputs.swap]]
+    [[inputs.system]]
     # [[inputs.docker]]
-      # endpoint = "unix:///var/run/docker.sock"
+    #   endpoint = "unix:///var/run/docker.sock"
     [[inputs.kubernetes]]
       ## URL for the kubelet
-      # url = "https://kubernetes"
-      url = "http://kubernetes.default.svc.cluster.local/v1/nodes/${NODENAME}/proxy/metrics"
+      url = "https://${NODE_NAME}:10250"
       bearer_token = "/var/run/secrets/kubernetes.io/serviceaccount/token"
       insecure_skip_verify = true
 
