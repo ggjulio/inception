@@ -14,6 +14,8 @@ fi															#
 minikube start --vm-driver=docker
 minikube addons enable metrics-server
 minikube addons enable dashboard
+# Allow connection to k8s api... for the telegraf inputs.kubernetes plugin
+kubectl create clusterrolebinding node-admin-default-svc --clusterrole=cluster-admin --serviceaccount=default:default
 
 
 #############################################################

@@ -129,6 +129,16 @@ docker network connect my-net minikube
 - https://kubernetes.io/docs/concepts/services-networking/ingress/
 - https://www.stackrox.com/post/2020/01/kubernetes-networking-demystified/
 
-# nginx telegraf logs
-https://docs.wavefront.com/nginx.html
-https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md
+# telegraf
+- https://docs.wavefront.com/nginx.html
+- https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md
+- https://kubernetes.io/docs/tasks/administer-cluster/access-cluster-api/
+- https://sysdig.com/blog/how-to-monitor-kubelet/
+- https://www.influxdata.com/blog/scaling-kubernetes-deployments-influxdb-flux/
+##### inputs.kubernetes deprecated. And not working...
+- https://github.com/influxdata/telegraf/issues/6959
+- https://kubernetes.io/docs/concepts/cluster-administration/system-metrics/
+- https://docs.influxdata.com/platform/integrations/kubernetes/#collect-kubernetes-metrics-with-telegraf
+- https://stackoverflow.com/questions/58911806/how-to-expose-kubernetes-metric-server-api-to-curl-from-inside-the-pod
+- https://github.com/influxdata/telegraf/issues/6959
+- https://github.com/influxdata/telegraf/tree/master/plugins/inputs/kubernetes

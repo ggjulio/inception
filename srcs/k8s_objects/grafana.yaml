@@ -14,6 +14,19 @@ spec:
       targetPort: 3000
   selector:
     app: grafana
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: grafana-pv-claim
+#   labels:
+#     app: ftps
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 2Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -33,9 +46,28 @@ spec:
         app: grafana
         env: learning
     spec:
+      # volumes:
+      #   - name: grafana-pv
+      #     persistentVolumeClaim:
+      #         claimName: grafana-pv-claim
       containers:
       - name: grafana
         image: my-grafana
         imagePullPolicy: Never
         ports:
         - containerPort: 3000
+        # volumeMounts:
+        #   - mountPath: /grafana/data
+        #     name: grafana-pv
+      # initContainers:
+      # - name: copy-backup-grafana-database
+      #   image: alpine
+      #   command: ['sh', '-c',
+      #   ' if [ "$(ls -A /work-dir)" ]; then echo "backup already copied"; exit 0; fi; echo "Persistent volume empty, mv backup to grafana...";
+      #     mv /grafana_data_backup/* /work-dir/ && rm -r /grafana_data_backup/;
+      #     echo "Done."
+      #   ']
+      #   volumeMounts:
+      #   - mountPath: /work-dir
+      #     name: grafana-pv
+
