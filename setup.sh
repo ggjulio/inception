@@ -56,3 +56,4 @@ kubectl apply --filename srcs/k8s_objects/telegrafDaemonSet.yaml
 minikube dashboard &
 
 watch -n 0 kubectl get all
+echo "To clean everything, use ./setup clean"
