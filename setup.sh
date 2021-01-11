@@ -41,6 +41,9 @@ docker network create --subnet=172.20.0.0/16 my-net
 docker network connect my-net minikube
 
 
+kubectl create configmap wordpress-db-config --from-file=./srcs/databases/wordpress.sql
+kubectl create configmap grafana-db-config --from-file=./srcs/databases/grafana.db
+
 kubectl apply --filename srcs/k8s_objects/nginx.yaml
 kubectl apply --filename srcs/k8s_objects/wordpress.yaml
 kubectl apply --filename srcs/k8s_objects/grafana.yaml
@@ -48,7 +51,7 @@ kubectl apply --filename srcs/k8s_objects/phpmyadmin.yaml
 kubectl apply --filename srcs/k8s_objects/ftps.yaml
 kubectl apply --filename srcs/k8s_objects/secrets.yaml
 kubectl apply --filename srcs/k8s_objects/influxdb.yaml
-kubectl apply --filename srcs/k8s_objects/mysql.yaml
+# kubectl apply --filename srcs/k8s_objects/mysql.yaml
 kubectl apply --filename srcs/k8s_objects/telegrafDaemonSet.yaml
 #kubectl apply --filename srcs/k8s_objects/
 

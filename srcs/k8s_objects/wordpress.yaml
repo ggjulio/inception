@@ -57,6 +57,9 @@ spec:
         - name: workdir-persistent-storage
           persistentVolumeClaim:
               claimName: wp-pv-claim
+        - name: wordpress-db-config
+          configMap:
+              name: wordpress-db-config
       containers:
         - name: nginx
           image: my-nginx
@@ -113,6 +116,37 @@ spec:
           image: alpine
           command: ['sh', '-c', 
           ' until nslookup mysql.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done']
+        - name: restore-wordpress-db
+          image: alpine
+          command: ['sh', '-c', 
+          'set -e;
+           apk add mysql-client;
+           database_exist="$(echo "select 1 from wp_users"|mysql -h mysql -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE || true)"
+ 
+           if [ "$database_exist" ]; then echo "database already exist"; exit 0; fi; echo "No database $MYSQL_DATABASE. Restoring db...";
+ 
+           mysql -h mysql -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < /script_sql/wordpress.sql;
+           echo "Done."
+          ']
+          volumeMounts:
+            - mountPath: /script_sql
+              name: wordpress-db-config
+          env:
+          - name: MYSQL_DATABASE
+            valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: MYSQL_DATABASE
+          - name: MYSQL_USER
+            valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: MYSQL_USER
+          - name: MYSQL_PASSWORD
+            valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: MYSQL_PASSWORD
 ---
 apiVersion: v1
 kind: ConfigMap
