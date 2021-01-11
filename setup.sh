@@ -54,3 +54,5 @@ kubectl apply --filename srcs/k8s_objects/telegrafDaemonSet.yaml
 #kubectl apply --filename srcs/k8s_objects/
 
 minikube dashboard &
+
+watch -n 0 kubectl get all
