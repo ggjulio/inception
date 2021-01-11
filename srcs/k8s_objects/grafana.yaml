@@ -64,7 +64,7 @@ spec:
         image: alpine
         command: ['sh', '-c',
         ' if [ "$(ls -A /work-dir)" ]; then echo "backup already copied"; exit 0; fi; echo "Persistent volume empty, mv backup to grafana...";
-          wget -q -O / /work-dir/grafana.db  https://github.com/ggjulio/ft_services/releases/download/0.1.0/grafana.db;
+          wget -q -O /work-dir/grafana.db  https://github.com/ggjulio/ft_services/releases/download/0.1.0/grafana.db;
           echo "Done."
         ']
         volumeMounts:
