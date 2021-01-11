@@ -41,8 +41,7 @@ docker network create --subnet=172.20.0.0/16 my-net
 docker network connect my-net minikube
 
 
-kubectl create configmap wordpress-db-config --from-file=./srcs/databases/wordpress.sql
-kubectl create configmap grafana-db-config --from-file=./srcs/databases/grafana.db
+# kubectl create configmap wordpress-db-config --from-file=./srcs/databases/wordpress.sql
 
 kubectl apply --filename srcs/k8s_objects/nginx.yaml
 kubectl apply --filename srcs/k8s_objects/wordpress.yaml
