@@ -53,4 +53,4 @@ kubectl apply --filename srcs/k8s_objects/mysql.yaml
 kubectl apply --filename srcs/k8s_objects/telegrafDaemonSet.yaml
 #kubectl apply --filename srcs/k8s_objects/
 
-minikube dashboard
+minikube dashboard &
