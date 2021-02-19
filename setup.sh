@@ -20,6 +20,7 @@ kubectl create clusterrolebinding node-admin-default-svc --clusterrole=cluster-a
 
 #############################################################
 ######## build images inside minikube  container ############
+sleep 2
 eval $(minikube docker-env)
 docker build -t my-telegraf srcs/images/telegraf > /dev/null
 docker build -t my-nginx srcs/images/nginx/ > /dev/null
