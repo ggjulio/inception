@@ -1,3 +1,37 @@
-version: "3.8"
-services: 
-	nginx:
+version: '3.7'
+services:
+  mariadb:
+    build: ./requirements/mariadb
+    image: ft-mariadb
+    environment:
+      - MYSQL_GROOT_HOST=%
+      - MYSQL_GROOT_PASSWORD=${MYSQL_GROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ~/juligonz/mysql_data:/var/lib/mysql
+  wordpress:
+    depends_on:
+      - mariadb
+    build: ./requirements/wordpress
+    image: ft-wordpress
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ~/juligonz/wordpress_data:/var/www/app
+
+  nginx:
+    depends_on:
+      - wordpress
+    build: ./requirements/nginx
+    image: ft-nginx
+    ports:
+      - 443:443
+    volumes:
+      - ~/juligonz/wordpress_data:/var/www/app
+    # command: 
+    # domainname: ${DOMAIN_NAME}
+    # hostname: nginx
