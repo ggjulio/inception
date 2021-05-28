@@ -14,4 +14,6 @@ COPY nginx-block.conf /etc/nginx/conf.d/default.conf
 COPY index.html /var/www/app
 EXPOSE 80 443
 
+VOLUME /var/www/app/
+
 CMD ["nginx", "-g", "daemon off;"]
