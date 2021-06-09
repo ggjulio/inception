@@ -52,3 +52,7 @@ services:
       - "20000-20002:20000-20002"
     volumes:
       - ./wordpress_data:/ftps_data
+
+  redis:
+    build: ./requirements/ftp
+    image: ft-redis

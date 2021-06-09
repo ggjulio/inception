@@ -22,6 +22,7 @@ mail: e@e.com
 - [ ] image ftp
 - [ ] image adminer
 - [ ] image redis
+	- [ ] redis with wordpress -> https://gaelbillon.com/installer-et-configurer-redis-pour-wordpress-en-5-minutes 
 - [ ] service de notre choix
 - [ ] site static de notre choix... (generator)
 	- [ ] hosted in nginx ?
