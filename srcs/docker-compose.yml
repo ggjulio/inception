@@ -22,7 +22,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - ~/juligonz/mysql_data:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql
   wordpress:
     depends_on:
       - mariadb
@@ -33,7 +33,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - ~/juligonz/wordpress:/var/www/app
+      - ./wordpress_data:/var/www/app
     command: ['sh', '-c',
     ' if [ "$$(ls -A /var/www/app)" ]; then echo "wordpress already downloaded"; exec php-fpm7 ; fi;
     echo "Persistent volume empty, downloading wordpress...";
@@ -41,3 +41,9 @@ services:
     echo "Done.";
     exec php-fpm7;
     ']
+    ## Bonus
+    mariadb:
+    build: ./requirements/ftp
+    image: ft-ftp
+    volumes:
+      - ./mysql_data:/var/lib/mysql

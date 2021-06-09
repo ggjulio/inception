@@ -4,7 +4,7 @@ LABEL maintainer="Julio <juligonz@student.42.fr>"
 RUN apk update \
 	&& apk add --no-cache mariadb mariadb-client su-exec\
  	&& addgroup mysql mysql \
-	&& rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql /run/mysqld /docker-entrypoint-initdb.d \
+	&& rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql /run/mysqld \
 	&& chown -R mysql:mysql /run/mysqld /var/lib/mysql \
 	&& chmod 1777 /var/run/mysqld \
 	&& echo -e "\n# Custom Config\n\
