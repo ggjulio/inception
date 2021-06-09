@@ -21,9 +21,7 @@ catch_workers_output = yes											\n\
 decorate_workers_output = no										\n\
 " >> /etc/php7/php-fpm.conf ;
 
-RUN wget https://github.com/vrana/adminer/releases/download/v4.7.7/adminer-4.7.7-mysql.php \
-	&& 
-
+RUN wget # dl adminer
 EXPOSE 9000
 
 VOLUME /var/www/app/

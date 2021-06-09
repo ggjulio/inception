@@ -9,9 +9,6 @@ services:
       - 443:443
     volumes:
       - ./wordpress_data:/var/www/app
-    # command: 
-    # domainname: ${DOMAIN_NAME}
-    # hostname: nginx
   mariadb:
     build: ./requirements/mariadb
     image: ft-mariadb
@@ -41,7 +38,8 @@ services:
     echo "Done.";
     exec php-fpm7;
     ']
-    ## Bonus
+
+## Bonus
   ftp:
     build: ./requirements/ftp
     image: ft-ftp
