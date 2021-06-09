@@ -12,10 +12,10 @@ RUN apk add --no-cache vsftpd openssl \
 	# && ln -sf /dev/stdout /var/log/vsftpd.log 
 
 EXPOSE 21 20 20000-20002
-VOLUME /ftps_data
 
 COPY vsftpd.conf /etc/vsftpd.conf
 COPY docker-entrypoint.sh /usr/local/bin
+VOLUME /ftps_data
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
