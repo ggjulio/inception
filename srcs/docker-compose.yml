@@ -49,10 +49,10 @@ services:
     ports:
       - "21:21"
       - "20:20"
-      - "20000-20002:20000-20002"
+      - "20000-20009:20000-20009"
     volumes:
       - ./wordpress_data:/ftps_data
 
-  redis:
-    build: ./requirements/ftp
-    image: ft-redis
+  # redis:
+  #   build: ./requirements/ftp
+  #   image: ft-redis
