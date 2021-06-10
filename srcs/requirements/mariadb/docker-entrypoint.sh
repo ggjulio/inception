@@ -89,24 +89,19 @@ setup_db(){
 }
 
 execute_sql_file(){
-	log_info "Init files: Executing $@"
 	mysql -ugroot -p"$MYSQL_GROOT_PASSWORD" --database="$MYSQL_DATABASE" < "$@"
 }
 
 execute_init_files(){
-	local files="/docker-entrypoint-initdb.d/test.sql"
-	# for file in "$files"; do
-		# case "$file" in
-		# 	*.sql)
-		# 		log_info "Init files: Executing $file"
-		# 		execute_sql_file "$file";;
-		# 	*)
-		# 		log_error "Init files: What the heck $file file is ? What am I supposed to do ?";;
-		# esac
-	# done
-
-	execute_sql_file "$files"
-
+	for file in /docker-entrypoint-initdb.d/* ; do
+		case "$file" in
+			*.sql)
+				log_info "Init files: Executing $file"
+				execute_sql_file "$file";;
+			*)
+				log_error "Init files: What the heck $file file is ? What am I supposed to do ?";;
+		esac
+	done
 }
 
 if [ "$1" = "mysqld" ]; then

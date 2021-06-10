@@ -24,20 +24,22 @@ services:
     depends_on:
       - mariadb
     build: ./requirements/php-fpm
-    image: ft-php-fpm
+    image: wordpress
+    # image: ft-php-fpm
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_HOST=${MYSQL_HOST}
     volumes:
       - ./wordpress_data:/var/www/app
-    command: ['sh', '-c',
-    ' if [ "$$(ls -A /var/www/app)" ]; then echo "wordpress already downloaded"; exec php-fpm7 ; fi;
-    echo "Persistent volume empty, downloading wordpress...";
-    wget -q -O - https://github.com/WordPress/WordPress/archive/5.6.tar.gz | tar -xz -C /var/www/app --strip-components=1;
-    echo "Done.";
-    exec php-fpm7;
-    ']
+    # command: ['sh', '-c',
+    # ' if [ "$$(ls -A /var/www/app)" ]; then echo "wordpress already downloaded"; exec php-fpm7 ; fi;
+    # echo "Persistent volume empty, downloading wordpress...";
+    # wget -q -O - https://github.com/WordPress/WordPress/archive/5.6.tar.gz | tar -xz -C /var/www/app --strip-components=1;
+    # echo "Done.";
+    # exec php-fpm7;
+    # ']
 
 ## Bonus
   ftp:
