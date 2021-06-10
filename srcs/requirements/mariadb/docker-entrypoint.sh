@@ -88,6 +88,27 @@ setup_db(){
 	log_info "Giving user ${MYSQL_USER} access to schema ${MYSQL_DATABASE}..."
 }
 
+execute_sql_file(){
+	log_info "Init files: Executing $@"
+	mysql -ugroot -p"$MYSQL_GROOT_PASSWORD" --database="$MYSQL_DATABASE" < "$@"
+}
+
+execute_init_files(){
+	local files="/docker-entrypoint-initdb.d/test.sql"
+	# for file in "$files"; do
+		# case "$file" in
+		# 	*.sql)
+		# 		log_info "Init files: Executing $file"
+		# 		execute_sql_file "$file";;
+		# 	*)
+		# 		log_error "Init files: What the heck $file file is ? What am I supposed to do ?";;
+		# esac
+	# done
+
+	execute_sql_file "$files"
+
+}
+
 if [ "$1" = "mysqld" ]; then
 	log_info "Entrypoint script for mysql server started..."
 	if [ -z "$MYSQL_GROOT_HOST" -o -z "$MYSQL_GROOT_PASSWORD" -o -z "$MYSQL_DATABASE" -o -z "$MYSQL_USER" -o -z "$MYSQL_PASSWORD" ]; then
@@ -106,6 +127,7 @@ if [ "$1" = "mysqld" ]; then
 		log_info 'Mysql init done.'
 		temp_server_start
 	 	setup_db
+		execute_init_files
 		temp_server_stop
 		log_info 'Mysql init done.'
 	else

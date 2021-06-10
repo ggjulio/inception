@@ -4,8 +4,9 @@ LABEL maintainer="Julio <juligonz@student.42.fr>"
 RUN apk update \
 	&& apk add --no-cache mariadb mariadb-client su-exec\
  	&& addgroup mysql mysql \
-	&& rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql /run/mysqld \
-	&& chown -R mysql:mysql /run/mysqld /var/lib/mysql \
+	&& rm -rf /var/lib/mysql \
+	&& mkdir -p /var/lib/mysql /run/mysqld /docker-entrypoint-initdb.d \
+	&& chown -R mysql:mysql /run/mysqld /var/lib/mysql /docker-entrypoint-initdb.d \
 	&& chmod 1777 /var/run/mysqld \
 	&& echo -e "\n# Custom Config\n\
 [mysqld]									\n\
@@ -22,6 +23,11 @@ VOLUME /var/lib/mysql
 COPY docker-entrypoint.sh /usr/local/bin
 
 ENTRYPOINT ["docker-entrypoint.sh"]
+
+# This line init the db using a db dump.
+# Usually this is added in a custom image when using an official image
+COPY test.sql /docker-entrypoint-initdb.d/test.sql
+
 
 EXPOSE 3306
 CMD ["mysqld"]

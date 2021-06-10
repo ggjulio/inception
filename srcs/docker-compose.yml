@@ -41,6 +41,8 @@ services:
 
 ## Bonus
   ftp:
+    depends_on:
+      - wordpress
     build: ./requirements/ftp
     image: ft-ftp
     environment:
