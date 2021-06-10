@@ -23,4 +23,6 @@ decorate_workers_output = no										\n\
 
 EXPOSE 9000
 
+#VOLUME /var/www/app
+
 CMD ["php-fpm7"]

@@ -12,7 +12,7 @@ mail: e@e.com
 - [x] image nginx tls v1.3 uniquement
 - [x] image php-fpm
 - [x] image mysql
-	- [ ] add a way to execute scripts to setup db
+	- [x] add a way to execute scripts to setup db
 
 - [x] image Wordpress + php-fpm (NON, j'ai une image generique php. Et je l'utiliserai pour wp et adminer)
 	- [ ] Par contre le sujet et la correction demande absolument une image par service donc a clarifier

@@ -9,6 +9,7 @@ services:
       - 443:443
     volumes:
       - ./wordpress_data:/var/www/app
+      - ./adminer_data:/var/www/app
   mariadb:
     build: ./requirements/mariadb
     image: ft-mariadb
@@ -33,13 +34,13 @@ services:
       - MYSQL_HOST=${MYSQL_HOST}
     volumes:
       - ./wordpress_data:/var/www/app
-    # command: ['sh', '-c',
-    # ' if [ "$$(ls -A /var/www/app)" ]; then echo "wordpress already downloaded"; exec php-fpm7 ; fi;
-    # echo "Persistent volume empty, downloading wordpress...";
-    # wget -q -O - https://github.com/WordPress/WordPress/archive/5.6.tar.gz | tar -xz -C /var/www/app --strip-components=1;
-    # echo "Done.";
-    # exec php-fpm7;
-    # ']
+    command: ['sh', '-c',
+    ' if [ "$$(ls -A /var/www/app)" ]; then echo "wordpress already downloaded"; exec php-fpm7 ; fi;
+    echo "Persistent volume empty, downloading wordpress...";
+    wget -q -O - https://github.com/WordPress/WordPress/archive/5.6.tar.gz | tar -xz -C /var/www/app --strip-components=1;
+    echo "Done.";
+    exec php-fpm7;
+    ']
 
 ## Bonus
   ftp:
@@ -56,6 +57,18 @@ services:
       - "20000-20009:20000-20009"
     volumes:
       - ./wordpress_data:/ftps_data
+
+ adminer:
+    depends_on:
+      - mariadb
+    image: ft-php-fpm
+    command: ['sh', '-c',
+    ' if [ "$$(ls -A /var/www/app)" ]; then echo "adminer already downloaded"; exec php-fpm7 ; fi;
+    echo "Persistent volume empty, downloading adminer...";
+    wget -O /var/www/app/index.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql.php
+    echo "Done.";
+    exec php-fpm7;
+    ']
 
   # redis:
   #   build: ./requirements/ftp
