@@ -1,18 +1,11 @@
 version: '3.7'
 services:
-  nginx:
-    depends_on:
-      - wordpress
-    build: ./requirements/nginx
-    image: ft-nginx
-    ports:
-      - 443:443
-    volumes:
-      - ./wordpress_data:/var/www/app
-      - ./adminer_data:/var/www/app
   mariadb:
+    restart: always
     build: ./requirements/mariadb
     image: ft-mariadb
+    networks:
+      - mynet
     environment:
       - MYSQL_GROOT_HOST=%
       - MYSQL_GROOT_PASSWORD=${MYSQL_GROOT_PASSWORD}
@@ -20,12 +13,19 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - ./data_mysql:/var/lib/mysql
+
+
   wordpress:
+    restart: always
     depends_on:
       - mariadb
-    build: ./requirements/php-fpm
+      - redis
+    build: ./requirements/wordpress
     image: wordpress
+    networks:
+      - mynet
+    # build: ./requirements/php-fpm
     # image: ft-php-fpm
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -33,43 +33,76 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_HOST=${MYSQL_HOST}
     volumes:
-      - ./wordpress_data:/var/www/app
+      - ./data_wordpress:/var/www/app
     command: ['sh', '-c',
     ' if [ "$$(ls -A /var/www/app)" ]; then echo "wordpress already downloaded"; exec php-fpm7 ; fi;
     echo "Persistent volume empty, downloading wordpress...";
     wget -q -O - https://github.com/WordPress/WordPress/archive/5.6.tar.gz | tar -xz -C /var/www/app --strip-components=1;
     echo "Done.";
+    mv /requirements/wp-config.php /var/www/app;
     exec php-fpm7;
     ']
 
-## Bonus
-  ftp:
+  nginx:
+    restart: always
     depends_on:
       - wordpress
-    build: ./requirements/ftp
-    image: ft-ftp
-    environment:
-      - USER=${MYSQL_USER}
-      - PASSWORD=${MYSQL_PASSWORD}
+    build: ./requirements/nginx
+    image: ft-nginx
+    networks:
+      - mynet
     ports:
-      - "21:21"
-      - "20:20"
-      - "20000-20009:20000-20009"
+      - 443:443
     volumes:
-      - ./wordpress_data:/ftps_data
+      - ./data_wordpress:/var/www/app
+      - ./data_adminer:/var/www/adminer
 
- adminer:
-    depends_on:
-      - mariadb
-    image: ft-php-fpm
-    command: ['sh', '-c',
-    ' if [ "$$(ls -A /var/www/app)" ]; then echo "adminer already downloaded"; exec php-fpm7 ; fi;
-    echo "Persistent volume empty, downloading adminer...";
-    wget -O /var/www/app/index.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql.php
-    echo "Done.";
-    exec php-fpm7;
-    ']
-
-  # redis:
+## Bonus
+  # ftp:
+  #   restart: always
+  #   depends_on:
+  #     - wordpress
   #   build: ./requirements/ftp
-  #   image: ft-redis
+  #   image: ft-ftp
+    # networks:
+    #   - mynet
+  #   environment:
+  #     - USER=${MYSQL_USER}
+  #     - PASSWORD=${MYSQL_PASSWORD}
+  #   ports:
+  #     - "21:21"
+  #     - "20:20"
+  #     - "20000-20009:20000-20009"
+  #   volumes:
+  #     - ./data_wordpress:/ftps_data
+
+  # adminer:
+  #   restart: always
+  #   depends_on:
+  #     - mariadb
+  #   image: ft-php-fpm
+    # networks:
+    #   - mynet
+  #   volumes:
+  #     - ./data_adminer:/var/www/app
+  #   command: ['sh', '-c',
+  #   ' if [ "$$(ls -A /var/www/app)" ]; then echo "adminer already downloaded"; exec php-fpm7 ; fi;
+  #   echo "Persistent volume empty, downloading adminer...";
+  #   wget -O /var/www/app/adminer.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql.php
+  #   echo "Done.";
+  #   exec php-fpm7;
+  #   ']
+
+  redis:
+    restart: always
+    build: ./requirements/redis
+    image: ft-redis
+    networks:
+      - mynet      
+
+volumes:
+  data_wordpress: {}
+  data_mysql: {}
+  data_adminer: {}
+networks:
+  mynet:

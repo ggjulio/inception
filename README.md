@@ -25,3 +25,14 @@ mail: e@e.com
 - [ ] service de notre choix
 - [ ] site static de notre choix... (generator)
 	- [ ] hosted in nginx ?
+
+
+
+- https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04
+- https://www.digitalocean.com/community/questions/can-we-host-multiple-websites-in-nginx-at-localhost
+
+
+- https://thibaut-deveraux.medium.com/a-docker-compose-file-to-install-wordpress-with-a-traefik-reverse-proxy-an-ssl-certificate-and-a-e878c2a03a17
+- https://www.combell.com/fr/help/kb/comment-implementer-redis-dans-wordpress/
+
+- https://hub.docker.com/_/redis

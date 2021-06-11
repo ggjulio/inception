@@ -31,6 +31,11 @@
     define( 'DB_CHARSET', 'utf8' );
     /** The Database Collate type. Don't change this if in doubt. */
     define( 'DB_COLLATE', '' );
+
+  /** For redis: config cache for total cache */
+    define( 'W3TC_CONFIG_CACHE_ENGINE', 'redis');
+    define( 'W3TC_CONFIG_CACHE_REDIS_SERVERS', 'redis::6379' );
+
     /**#@+
     * Authentication Unique Keys and Salts.
     *

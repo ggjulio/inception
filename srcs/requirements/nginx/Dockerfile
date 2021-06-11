@@ -7,13 +7,17 @@ RUN apk update \
  && apk del openssl \
  && mkdir -p /run/nginx \
  && mkdir -p /var/www/app \
+ && mkdir -p /var/www/adminer \
  && ln -sf /dev/stdout /var/log/nginx/access.log \
  && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY nginx-block.conf /etc/nginx/conf.d/default.conf
+COPY nginx-block-adminer.conf /etc/nginx/conf.d/adminer.conf
 COPY index.html /var/www/app
-EXPOSE 80 443
+
+RUN ls -s /etc/nginx/conf.d/
 
 VOLUME /var/www/app/
 
+EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
