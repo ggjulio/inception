@@ -17,6 +17,7 @@ COPY index.html /var/www/app
 RUN ls -s /etc/nginx/conf.d/
 
 VOLUME /var/www/app/
+VOLUME /var/www/adminer/
 
 EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]

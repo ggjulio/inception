@@ -21,13 +21,8 @@ catch_workers_output = yes											\n\
 decorate_workers_output = no										\n\
 " >> /etc/php7/php-fpm.conf ;
 
-RUN mkdir -p /var/www/app \
-	&& wget -O /var/www/app/adminer.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql.php
-
-EXPOSE 9000
-
-# VOLUME /var/www/app/
 COPY docker-entrypoint.sh /usr/local/bin
 ENTRYPOINT ["docker-entrypoint.sh"]
 
+EXPOSE 9000
 CMD ["php-fpm7"]
