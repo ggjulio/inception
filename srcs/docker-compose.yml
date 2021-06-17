@@ -20,7 +20,7 @@ services:
     restart: always
     depends_on:
       - mariadb
-      - redis
+      # - redis
     build: ./requirements/wordpress
     image: wordpress
     networks:
@@ -52,7 +52,8 @@ services:
     networks:
       - mynet
     ports:
-      - 443:443
+      - 443:443   # wordpress
+      - 8080:8080 # adminer
     volumes:
       - ./data_wordpress:/var/www/app
       - ./data_adminer:/var/www/adminer
@@ -76,29 +77,29 @@ services:
   #   volumes:
   #     - ./data_wordpress:/ftps_data
 
-  # adminer:
-  #   restart: always
-  #   depends_on:
-  #     - mariadb
-  #   image: ft-php-fpm
-    # networks:
-    #   - mynet
-  #   volumes:
-  #     - ./data_adminer:/var/www/app
-  #   command: ['sh', '-c',
-  #   ' if [ "$$(ls -A /var/www/app)" ]; then echo "adminer already downloaded"; exec php-fpm7 ; fi;
-  #   echo "Persistent volume empty, downloading adminer...";
-  #   wget -O /var/www/app/adminer.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql.php
-  #   echo "Done.";
-  #   exec php-fpm7;
-  #   ']
-
-  redis:
+  adminer:
     restart: always
-    build: ./requirements/redis
-    image: ft-redis
+    depends_on:
+      - mariadb
+    image: ft-php-fpm
     networks:
-      - mynet      
+      - mynet
+    volumes:
+      - ./data_adminer:/var/www/app
+    command: ['sh', '-c',
+    ' if [ "$$(ls -A /var/www/app)" ]; then echo "adminer already downloaded"; exec php-fpm7 ; fi;
+    echo "Persistent volume empty, downloading adminer...";
+    wget -O /var/www/app/adminer.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql.php ;
+    echo "Done.";
+    exec php-fpm7;
+    ']
+
+  # redis:
+  #   restart: always
+  #   build: ./requirements/redis
+  #   image: ft-redis
+  #   networks:
+  #     - mynet      
 
 volumes:
   data_wordpress: {}

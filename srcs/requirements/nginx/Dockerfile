@@ -12,7 +12,6 @@ RUN apk update \
  && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY nginx-block.conf /etc/nginx/conf.d/default.conf
-COPY nginx-block-adminer.conf /etc/nginx/conf.d/adminer.conf
 COPY index.html /var/www/app
 
 RUN ls -s /etc/nginx/conf.d/
