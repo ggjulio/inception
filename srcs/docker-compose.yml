@@ -20,13 +20,11 @@ services:
     restart: always
     depends_on:
       - mariadb
-      # - redis
+      - redis
     build: ./requirements/wordpress
     image: wordpress
     networks:
       - mynet
-    # build: ./requirements/php-fpm
-    # image: ft-php-fpm
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
@@ -34,14 +32,6 @@ services:
       - MYSQL_HOST=${MYSQL_HOST}
     volumes:
       - ./data_wordpress:/var/www/app
-    # command: ['sh', '-c',
-    # ' if [ "$$(ls -A /var/www/app)" ]; then echo "wordpress already downloaded"; exec php-fpm7 ; fi;
-    # echo "Persistent volume empty, downloading wordpress...";
-    # wget -q -O - https://github.com/WordPress/WordPress/archive/5.6.tar.gz | tar -xz -C /var/www/app --strip-components=1;
-    # echo "Done.";
-    # mv /requirements/wp-config.php /var/www/app;
-    # exec php-fpm7;
-    # ']
 
   nginx:
     restart: always
@@ -58,24 +48,24 @@ services:
       - ./data_wordpress:/var/www/app
       - ./data_adminer:/var/www/adminer
 
-## Bonus
-  # ftp:
-  #   restart: always
-  #   depends_on:
-  #     - wordpress
-  #   build: ./requirements/ftp
-  #   image: ft-ftp
-    # networks:
-    #   - mynet
-  #   environment:
-  #     - USER=${MYSQL_USER}
-  #     - PASSWORD=${MYSQL_PASSWORD}
-  #   ports:
-  #     - "21:21"
-  #     - "20:20"
-  #     - "20000-20009:20000-20009"
-  #   volumes:
-  #     - ./data_wordpress:/ftps_data
+# Bonus
+  ftp:
+    restart: always
+    depends_on:
+      - wordpress
+    build: ./requirements/ftp
+    image: ft-ftp
+    networks:
+      - mynet
+    environment:
+      - USER=${MYSQL_USER}
+      - PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "21:21"
+      - "20:20"
+      - "20000-20009:20000-20009"
+    volumes:
+      - ./data_wordpress:/ftps_data
 
   adminer:
     restart: always
@@ -89,12 +79,12 @@ services:
       - ./data_adminer:/var/www/app
 
 
-  # redis:
-  #   restart: always
-  #   build: ./requirements/redis
-  #   image: ft-redis
-  #   networks:
-  #     - mynet      
+  redis:
+    restart: always
+    build: ./requirements/redis
+    image: ft-redis
+    networks:
+      - mynet      
 
 volumes:
   data_wordpress: {}
