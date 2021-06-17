@@ -21,7 +21,6 @@ skip-networking	= false						\n\
 VOLUME /var/lib/mysql
 
 COPY docker-entrypoint.sh /usr/local/bin
-
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # This line init the db using a db dump.

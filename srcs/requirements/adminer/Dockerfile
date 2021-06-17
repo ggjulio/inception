@@ -21,6 +21,8 @@ catch_workers_output = yes											\n\
 decorate_workers_output = no										\n\
 " >> /etc/php7/php-fpm.conf ;
 
+VOLUME /var/www/app/
+
 COPY docker-entrypoint.sh /usr/local/bin
 ENTRYPOINT ["docker-entrypoint.sh"]
 

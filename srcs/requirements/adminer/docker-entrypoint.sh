@@ -2,7 +2,7 @@
 
 set -e
 
-if [ "$$(ls -A /var/www/app)" ]; then
+if [ "$(ls -A /var/www/app)" ]; then
 	echo "adminer already downloaded"
 else
 	echo "Persistent volume empty, downloading adminer..."
