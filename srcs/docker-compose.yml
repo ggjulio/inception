@@ -81,18 +81,13 @@ services:
     restart: always
     depends_on:
       - mariadb
-    image: ft-php-fpm
+    build: ./requirements/adminer
+    image: adminer
     networks:
       - mynet
     volumes:
       - ./data_adminer:/var/www/app
-    command: ['sh', '-c',
-    ' if [ "$$(ls -A /var/www/app)" ]; then echo "adminer already downloaded"; exec php-fpm7 ; fi;
-    echo "Persistent volume empty, downloading adminer...";
-    wget -O /var/www/app/adminer.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql.php ;
-    echo "Done.";
-    exec php-fpm7;
-    ']
+
 
   # redis:
   #   restart: always

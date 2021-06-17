@@ -19,7 +19,7 @@ mail: e@e.com
 
 
 - [x] image ftp
-- [ ] image adminer
+- [x] image adminer
 - [ ] image redis
 	- [ ] redis with wordpress -> https://gaelbillon.com/installer-et-configurer-redis-pour-wordpress-en-5-minutes 
 - [ ] service de notre choix

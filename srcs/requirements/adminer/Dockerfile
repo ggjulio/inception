@@ -1,5 +1,5 @@
 FROM alpine:3.11
-LABEL maintainer="Julio <juligonz@student.42.fr>" 
+LABEL maintainer="Julio <juligonz@student.42.fr>"
 
 RUN set -eux; \
 	apk add --no-cache php7-fpm php7-mysqli php7-json php7-xml php7-curl \
@@ -27,5 +27,7 @@ RUN mkdir -p /var/www/app \
 EXPOSE 9000
 
 # VOLUME /var/www/app/
+COPY docker-entrypoint.sh /usr/local/bin
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD ["php-fpm7"]
