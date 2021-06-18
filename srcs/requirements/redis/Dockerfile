@@ -5,7 +5,14 @@ RUN apk update \
 	&& apk add --no-cache redis su-exec \
 	&& addgroup redis redis \
 	&& mkdir -p /data \
-	&& chown -R redis:redis /data
+	&& chown -R redis:redis /data \
+	&& echo -e "\n; Custom Config\n\
+maxmemory 256mb							\n\
+maxmemory-policy allkeys-lru			\n\
+			\n\
+			\n\
+" >> /etc/redis.conf
+
 
 VOLUME /data
 

@@ -33,8 +33,9 @@
     define( 'DB_COLLATE', '' );
 
   /** For redis: config cache for total cache */
-    define( 'W3TC_CONFIG_CACHE_ENGINE', 'redis');
-    define( 'W3TC_CONFIG_CACHE_REDIS_SERVERS', 'redis::6379' );
+  define('WP_CACHE', true);
+  define('WP_CACHE_KEY_SALT', getenv('WP_CACHE_KEY_SALT'));
+
 
     /**#@+
     * Authentication Unique Keys and Salts.

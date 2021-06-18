@@ -26,7 +26,8 @@ mail: e@e.com
 - [ ] site static de notre choix... (generator)
 	- [ ] hosted in nginx ?
 
-
+Note:
+ - dommage d'avoir du code duplique (wordpress et adminer -> correction demande exactement 1 dockerfile par service)
 
 - https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04
 - https://www.digitalocean.com/community/questions/can-we-host-multiple-websites-in-nginx-at-localhost
@@ -37,3 +38,5 @@ mail: e@e.com
 
 - https://hub.docker.com/_/redis
 - https://codeable.io/wordpress-developers-intro-to-docker-part-two/
+
+- https://www.cloudways.com/blog/install-redis-cache-wordpress/
