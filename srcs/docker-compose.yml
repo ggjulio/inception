@@ -30,6 +30,8 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_HOST=${MYSQL_HOST}
+      - WP_REDIS_HOST=${WP_REDIS_HOST}
+      - WP_CACHE_KEY_SALT=${WP_CACHE_KEY_SALT}
     volumes:
       - ./data_wordpress:/var/www/app
 
@@ -44,6 +46,7 @@ services:
     ports:
       - 443:443   # wordpress
       - 8080:8080 # adminer
+      - 8081:8081 # Static website
     volumes:
       - ./data_wordpress:/var/www/app
       - ./data_adminer:/var/www/adminer

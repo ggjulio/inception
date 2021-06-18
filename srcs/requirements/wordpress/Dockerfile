@@ -26,8 +26,13 @@ VOLUME /var/www/app/
 COPY docker-entrypoint.sh /usr/local/bin
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-# Usually app copy are inside a custom image (example --> FROM php)
+# Usually app layers are inside a custom image (--> FROM php-fpm, then thoses two layers below)
 COPY wp-config.php /requirements/wp-config.php
+RUN apk add --no-cache curl php7 php-phar \
+	&& curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+	&& apk del curl \
+	&& chmod +x wp-cli.phar \
+	&& mv wp-cli.phar /usr/local/bin/wp
 
 EXPOSE 9000
 CMD ["php-fpm7"]
