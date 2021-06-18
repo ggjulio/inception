@@ -36,3 +36,4 @@ mail: e@e.com
 - https://www.combell.com/fr/help/kb/comment-implementer-redis-dans-wordpress/
 
 - https://hub.docker.com/_/redis
+- https://codeable.io/wordpress-developers-intro-to-docker-part-two/
