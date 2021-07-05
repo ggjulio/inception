@@ -11,17 +11,17 @@ RUN wget https://dot.net/v1/dotnet-install.sh \
 	&& chmod +x dotnet-install.sh \
 	&& ./dotnet-install.sh -c 5.0
 
-ENV PATH="/root/.dotnet:${PATH}"
-
+ENV DOTNET_ROOT="/root/.dotnet"
+ENV PATH="${DOTNET_ROOT}:${PATH}"
 
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
-COPY *.csproj ./
+COPY app/*.csproj ./
 RUN dotnet restore
 
 # Copy everything else and build
-COPY ../engine/examples ./
+COPY app/Program.cs ./
 RUN dotnet publish -c Release -o out
 
-CMD [ "dotnet", "--version" ]
+CMD [ "./out/app" ]
