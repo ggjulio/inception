@@ -24,7 +24,6 @@ mail: e@e.com
 	- [ ] redis with wordpress -> https://gaelbillon.com/installer-et-configurer-redis-pour-wordpress-en-5-minutes 
 - [ ] service de notre choix
 - [ ] site static de notre choix... (generator)
-	- [ ] hosted in nginx ?
 
 Note:
  - dommage d'avoir du code duplique (wordpress et adminer -> correction demande exactement 1 dockerfile par service)
@@ -40,3 +39,7 @@ Note:
 - https://codeable.io/wordpress-developers-intro-to-docker-part-two/
 
 - https://www.cloudways.com/blog/install-redis-cache-wordpress/
+
+##### dockerize dotnetcore app
+- https://docs.docker.com/samples/dotnetcore/
+
