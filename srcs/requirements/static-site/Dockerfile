@@ -27,6 +27,7 @@ RUN dotnet restore \
 # Copy everything else and build
 COPY app/Program.cs ./
 COPY app/input ./input
+COPY app/theme ./theme
 RUN dotnet publish -c Release -o out
 
-CMD [ "sh" ]
+CMD [ "dotnet", "run" ]

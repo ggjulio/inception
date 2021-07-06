@@ -46,10 +46,11 @@ services:
     ports:
       - 443:443   # wordpress
       - 8080:8080 # adminer
-      - 8081:8081 # Static website
+      - 8081:8081 # Statiq website
     volumes:
       - ./data_wordpress:/var/www/app
       - ./data_adminer:/var/www/adminer
+      - ./data_statiq:/var/www/statiq
 
 # Bonus
   ftp:
@@ -81,17 +82,27 @@ services:
     volumes:
       - ./data_adminer:/var/www/app
 
-
-  redis:
+  statiq:
     restart: always
-    build: ./requirements/redis
-    image: ft-redis
+    build: ./requirements/adminer
+    image: statiq
     networks:
-      - mynet      
+      - mynet
+    volumes:
+      - ./data_statiq:/app/output
+
+
+  # redis:
+  #   restart: always
+  #   build: ./requirements/redis
+  #   image: ft-redis
+  #   networks:
+  #     - mynet      
 
 volumes:
   data_wordpress: {}
   data_mysql: {}
   data_adminer: {}
+  data_statiq: {}
 networks:
   mynet:
