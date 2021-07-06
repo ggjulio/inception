@@ -1,5 +1,7 @@
-Title: My First Statiq page
+Title: Inception
 ---
-# Hello World!
+# Bonus:
+### This is a static website generated with Statiq and .net core 5 
 
-Hello from my first Statiq page.
+Go back to [Wordpress](localhost:443)  
+Go back to [Adminer](localhost:9000)
