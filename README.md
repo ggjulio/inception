@@ -16,7 +16,7 @@ mail: e@e.com
 
 - [x] image Wordpress + php-fpm (NON, j'ai une image generique php. Et je l'utiliserai pour wp et adminer)
 	- [ ] Par contre le sujet et la correction demande absolument une image par service donc a clarifier
-
+- [ ] Domain Name -> juligonz.42.fr
 
 - [x] image ftp
 - [x] image adminer
@@ -42,4 +42,13 @@ Note:
 
 ##### dockerize dotnetcore app
 - https://docs.docker.com/samples/dotnetcore/
+##### static site generator .net core with Wyam
+- https://wyam.io/
+- https://www.youtube.com/watch?v=kkaseQEBwnA
+
+##### Wyam or statiq ?
+- https://statiq.dev/
+- https://statiq.dev/framework/
+- https://www.youtube.com/watch?v=43oQTRZqK9g
+- https://statiq.dev/web/themes/
 

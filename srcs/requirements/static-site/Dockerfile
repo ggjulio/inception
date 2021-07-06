@@ -12,16 +12,21 @@ RUN wget https://dot.net/v1/dotnet-install.sh \
 	&& ./dotnet-install.sh -c 5.0
 
 ENV DOTNET_ROOT="/root/.dotnet"
-ENV PATH="${DOTNET_ROOT}:${PATH}"
+ENV TOOLS="/root/.dotnet/tools"
+ENV PATH="${DOTNET_ROOT}:${TOOLS}:${PATH}"
 
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
 COPY app/*.csproj ./
-RUN dotnet restore
+RUN dotnet restore \
+	# && dotnet add package Statiq.App --version 1.0.0-beta.46 \
+	&& dotnet add package Statiq.Markdown --version 1.0.0-beta.46 \
+	&& dotnet add package Statiq.Web --version 1.0.0-beta.31
 
 # Copy everything else and build
 COPY app/Program.cs ./
+COPY app/input ./input
 RUN dotnet publish -c Release -o out
 
-CMD [ "./out/app" ]
+CMD [ "sh" ]
