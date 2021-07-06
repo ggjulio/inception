@@ -84,7 +84,7 @@ services:
 
   statiq:
     restart: always
-    build: ./requirements/adminer
+    build: ./requirements/statiq
     image: statiq
     networks:
       - mynet
