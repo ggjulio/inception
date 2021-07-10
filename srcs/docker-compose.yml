@@ -20,7 +20,7 @@ services:
     restart: always
     depends_on:
       - mariadb
-      - redis
+      # - redis
     build: ./requirements/wordpress
     image: wordpress
     networks:
@@ -83,7 +83,7 @@ services:
       - ./data_adminer:/var/www/app
 
   statiq:
-    restart: always
+    restart: on-failure
     build: ./requirements/statiq
     image: statiq
     networks:

@@ -1,7 +1,8 @@
 Title: Inception
 ---
 # Bonus:
-### This is a static website generated with Statiq and .net core 5 
+### This is a static website generated with Statiq package + .net core 5
+### It is served via my nginx server on port 8081
 
-Go back to [Wordpress](localhost:443)  
-Go back to [Adminer](localhost:9000)
+Go back to [Wordpress](https://localhost:443)  
+Go back to [Adminer](https://localhost:8080)
