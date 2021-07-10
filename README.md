@@ -23,7 +23,7 @@ mail: e@e.com
 - [ ] image redis
 	- [ ] redis with wordpress -> https://gaelbillon.com/installer-et-configurer-redis-pour-wordpress-en-5-minutes 
 - [ ] service de notre choix
-- [ ] site static de notre choix... (generator)
+- [x] site static de notre choix... (generator)
 
 Note:
  - dommage d'avoir du code duplique (wordpress et adminer -> correction demande exactement 1 dockerfile par service)

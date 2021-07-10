@@ -20,7 +20,7 @@ services:
     restart: always
     depends_on:
       - mariadb
-      # - redis
+      - redis
     build: ./requirements/wordpress
     image: wordpress
     networks:
@@ -92,12 +92,12 @@ services:
       - ./data_statiq:/app/output
 
 
-  # redis:
-  #   restart: always
-  #   build: ./requirements/redis
-  #   image: ft-redis
-  #   networks:
-  #     - mynet      
+  redis:
+    restart: always
+    build: ./requirements/redis
+    image: ft-redis
+    networks:
+      - mynet      
 
 volumes:
   data_wordpress: {}

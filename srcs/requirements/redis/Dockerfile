@@ -6,12 +6,12 @@ RUN apk update \
 	&& addgroup redis redis \
 	&& mkdir -p /data \
 	&& chown -R redis:redis /data \
-	&& echo -e "\n; Custom Config\n\
+	&& echo -e "\n# Custom Config		\n\
 maxmemory 256mb							\n\
 maxmemory-policy allkeys-lru			\n\
-			\n\
-			\n\
-" >> /etc/redis.conf
+protected-mode no						\n\
+										\n\
+" > /etc/redis.conf
 
 
 VOLUME /data
@@ -20,4 +20,4 @@ COPY docker-entrypoint.sh /usr/local/bin
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 6379
-CMD ["redis-server"]
+CMD ["redis-server", "/etc/redis.conf"]
