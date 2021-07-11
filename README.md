@@ -13,15 +13,14 @@ mail: e@e.com
 - [x] image php-fpm
 - [x] image mysql
 	- [x] add a way to execute scripts to setup db
-
-- [x] image Wordpress + php-fpm (NON, j'ai une image generique php. Et je l'utiliserai pour wp et adminer)
-	- [ ] Par contre le sujet et la correction demande absolument une image par service donc a clarifier
+- [x] image Wordpress + php-fpm
 - [ ] Domain Name -> juligonz.42.fr
+- [ ] Makefile
 
+Bonus:
 - [x] image ftp
 - [x] image adminer
-- [ ] image redis
-	- [ ] redis with wordpress -> https://gaelbillon.com/installer-et-configurer-redis-pour-wordpress-en-5-minutes 
+- [x] image redis
 - [ ] service de notre choix
 - [x] site static de notre choix... (generator)
 
