@@ -2,7 +2,10 @@ FROM alpine:3.11
 LABEL maintainer="Julio <juligonz@student.42.fr>" 
 
 RUN apk update \
-	&& apk add --no-cache perl perl-dev curl wget \
+	&& apk add --no-cache perl perl-dev curl wget make tar openssl openssl-dev zlib zlib-dev gcc build-base \
+		perl-io-socket-inet6 \
+		perl-io-socket-ssl \
+		perl-json \
 	&& curl -L https://cpanmin.us/ -o /usr/local/bin/cpanm \
 	&& chmod +x /usr/local/bin/cpanm \
 	&& mkdir ddclient \
