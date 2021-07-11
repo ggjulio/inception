@@ -25,19 +25,24 @@ has_error=
 if [ -z "$PROTOCOL" ]; then
 	log_error '$PROTOCOL variable not defined'
 	has_error=1
-elif [ -z "$SERVER" ]; then
+fi
+if [ -z "$SERVER" ]; then
 	log_error '$SERVER variable not defined'
 	has_error=1
-elif [ -z "$DAEMON" ]; then
+fi
+if [ -z "$DAEMON" ]; then
 	log_error '$DAEMON variable not defined'
 	has_error=1
-elif [ -z "$LOGIN" ]; then
+fi
+if [ -z "$LOGIN" ]; then
 	log_error '$LOGIN variable not defined'
 	has_error=1
-elif [ -z "$PASSWORD" ]; then
+fi
+if [ -z "$PASSWORD" ]; then
 	log_error '$PASSWORD variable not defined'
 	has_error=1
-elif [ -z "$DOMAIN_NAME" ]; then
+fi
+if [ -z "$DOMAIN_NAME" ]; then
 	log_error '$DOMAIN_NAME variable not defined'
 	has_error=1
 fi

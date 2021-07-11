@@ -5,7 +5,7 @@ RUN apk update \
 	&& apk add --no-cache --virtual=build-deps \
 		wget make tar gcc build-base \
 	&& apk add --no-cache \
-		perl perl-dev curl wget make tar openssl openssl-dev zlib zlib-dev gcc build-base \
+		perl perl-dev curl openssl openssl-dev zlib zlib-dev \
 		perl-io-socket-inet6 \
 		perl-io-socket-ssl \
 	&& curl -L https://cpanmin.us/ -o /usr/local/bin/cpanm \
@@ -22,8 +22,8 @@ RUN apk update \
 	&& apk del --purge build-deps \
 	&& echo "Installing and configuring ddclient..." \
 	&& cp ddclient/ddclient /usr/sbin/ \
-	&& mkdir /etc/ddclient /var/cache/ddclient
-RUN echo -e "# Custom Config\n\
+	&& mkdir /etc/ddclient /var/cache/ddclient \
+	&& echo -e "# Custom Config\n\
 ssl=yes                                 									\n\
 use=web, web=checkip.dyndns.com/, web-skip='Current IP Address: '			\n\
 syslog=yes                              # log update msgs to syslog			\n\
