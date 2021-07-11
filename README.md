@@ -21,7 +21,7 @@ Bonus:
 - [x] image ftp
 - [x] image adminer
 - [x] image redis
-- [ ] service de notre choix
+- [x] service de notre choix
 - [x] site static de notre choix... (generator)
 
 Note:

@@ -98,6 +98,21 @@ services:
     image: ft-redis
     networks:
       - mynet      
+  
+  ddns:
+    restart: always
+    build: ./requirements/ddns
+    image: ddns
+    networks:
+      - mynet      
+    environment:
+      - PROTOCOL=${PROTOCOL}
+      - SERVER=${SERVER}
+      - DAEMON=${DAEMON} # check every n seconds
+      - LOGIN=${LOGIN}
+      - PASSWORD=${PASSWORD}
+      - DOMAIN_NAME=${DOMAIN_NAME}
+
 
 volumes:
   data_wordpress: {}

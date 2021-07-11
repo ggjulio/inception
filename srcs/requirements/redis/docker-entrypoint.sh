@@ -2,6 +2,11 @@
 
 set -e
 
+BOLD="\e[1m"
+RESET="\e[0m"
+LIGHT_GREEN="\e[92m"
+LIGHT_CYAN="\e[96m"
+
 logging(){
 	local type=$1; shift
 	printf "${LIGHT_CYAN}${BOLD}Entrypoint${RESET} [%b] : %b\n" "$type" "$*"
