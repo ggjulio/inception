@@ -3,7 +3,7 @@ services:
   mariadb:
     restart: always
     build: ./requirements/mariadb
-    image: ft-mariadb
+    image: mariadb
     networks:
       - mynet
     environment:
@@ -14,7 +14,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - ./data_mysql:/var/lib/mysql
-
 
   wordpress:
     restart: always
@@ -39,7 +38,7 @@ services:
     depends_on:
       - wordpress
     build: ./requirements/nginx
-    image: ft-nginx
+    image: nginx
     networks:
       - mynet
     ports:
@@ -57,7 +56,7 @@ services:
     depends_on:
       - wordpress
     build: ./requirements/ftp
-    image: ft-ftp
+    image: ftp
     networks:
       - mynet
     environment:
@@ -90,11 +89,10 @@ services:
     volumes:
       - ./data_statiq:/app/output
 
-
   redis:
     restart: always
     build: ./requirements/redis
-    image: ft-redis
+    image: redis
     networks:
       - mynet      
   
