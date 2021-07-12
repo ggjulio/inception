@@ -31,7 +31,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_HOST=${MYSQL_HOST}
       - WP_REDIS_HOST=${WP_REDIS_HOST}
-      - WP_CACHE_KEY_SALT=${WP_CACHE_KEY_SALT}
     volumes:
       - ./data_wordpress:/var/www/app
 

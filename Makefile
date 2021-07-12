@@ -1,19 +1,28 @@
-# This is a minimal set of ANSI/VT100 color codes
-_END=$'\x1b[0m
-_BOLD=$'\x1b[1m
-_UNDER=$'\x1b[4m
-_REV=$'\x1b[7m
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+_BOLD      =\e[1m
+_DIM       =\e[2m
+_UNDERLINE =\e[4m
+_BLINK     =\e[5m
+_REVERSE   =\e[7m
+_HIDDEN    =\e[8m
+
+# RESET list
+_R          =\e[0m
+_RBOLD      =\e[21m
+_RDIM       =\e[22m
+_RUNDERLINE =\e[24m
+_RBLINK     =\e[25m
+_RREVERSE   =\e[27m
+_RHIDDEN    =\e[28m
 
 # Colors
-_GREY=$'\x1b[30m
-_RED=$'\x1b[31m
-_GREEN=$'\x1b[32m
-_YELLOW=$'\x1b[33m
-_BLUE=$'\x1b[34m
-_PURPLE=$'\x1b[35m
-_CYAN=$'\x1b[36m
-_WHITE=$'\x1b[37m
-
+_RED      =\e[91m
+_GREEN    =\e[92m
+_YELLOW   =\e[93m
+_BLUE     =\e[94m
+_MAGENTA  =\e[35m
+_CYAN     =\e[96m
+_WHITE    =\e[97m
 
 NAME=inception
 
@@ -30,7 +39,13 @@ clean:
 	@cd ./srcs && docker-compose down
 
 fclean: clean
-	@echo "$(_GREEN)$(NAME) Don't do that !$(_END)"
+	@-docker stop $(shell docker ps -qa)  
+	@-docker rm $(shell docker ps -qa)
+	@-docker rmi -f $(shell docker images -qa)
+	@-docker network rm $(shell docker network ls -q)
+	@-docker volume rm $(shell docker volume ls -q)
+	@-docker system prune -f
+	@echo "$(_GREEN)$(NAME) Deleted everyting, poor bandwidth ... :( $(_END)"
 
 re: fclean all
 
