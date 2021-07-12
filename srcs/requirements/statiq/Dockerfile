@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:3.14
 LABEL maintainer="Julio <juligonz@student.42.fr>" 
 
 RUN apk update \
@@ -20,8 +20,6 @@ WORKDIR /app
 # Copy csproj and restore as distinct layers
 COPY app/*.csproj ./
 RUN dotnet restore \
-	# && dotnet add package Statiq.App --version 1.0.0-beta.46 \
-	&& dotnet add package Statiq.Markdown --version 1.0.0-beta.46 \
 	&& dotnet add package Statiq.Web --version 1.0.0-beta.31
 
 # Copy everything else and build

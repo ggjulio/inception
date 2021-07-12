@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:3.14
 LABEL maintainer="Julio <juligonz@student.42.fr>" 
 
 RUN apk update \
@@ -11,10 +11,8 @@ RUN apk update \
  && ln -sf /dev/stdout /var/log/nginx/access.log \
  && ln -sf /dev/stderr /var/log/nginx/error.log
 
-COPY nginx-block.conf /etc/nginx/conf.d/default.conf
+COPY nginx-block.conf /etc/nginx/http.d/default.conf
 COPY index.html /var/www/app
-
-RUN ls -s /etc/nginx/conf.d/
 
 VOLUME /var/www/app/
 
