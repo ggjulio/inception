@@ -45,7 +45,7 @@ fclean: clean
 	@-docker network rm $(shell docker network ls -q)
 	@-docker volume rm $(shell docker volume ls -q)
 	@-docker system prune -f
-	@echo "$(_GREEN)$(NAME) Deleted everyting, poor bandwidth ... :( $(_END)"
+	@echo "$(_GREEN) Deleted everyting, poor bandwidth ... :( $(_END)"
 
 re: fclean all
 
