@@ -13,7 +13,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - ./data_mysql:/var/lib/mysql
+      - ~/data/mysql:/var/lib/mysql
 
   wordpress:
     restart: always
@@ -31,7 +31,7 @@ services:
       - MYSQL_HOST=${MYSQL_HOST}
       - WP_REDIS_HOST=${WP_REDIS_HOST}
     volumes:
-      - ./data_wordpress:/var/www/app
+      - ~/data/wordpress:/var/www/app
 
   nginx:
     restart: always
@@ -46,9 +46,9 @@ services:
       - 8080:8080 # adminer
       - 8081:8081 # Statiq website
     volumes:
-      - ./data_wordpress:/var/www/app
-      - ./data_adminer:/var/www/adminer
-      - ./data_statiq:/var/www/statiq
+      - ~/data/wordpress:/var/www/app
+      - ~/data/adminer:/var/www/adminer
+      - ~/data/statiq:/var/www/statiq
 
 # Bonus
   ftp:
@@ -67,7 +67,7 @@ services:
       - "20:20"
       - "20000-20009:20000-20009"
     volumes:
-      - ./data_wordpress:/ftps_data
+      - ~/data/wordpress:/ftps_data
 
   adminer:
     restart: always
@@ -78,7 +78,7 @@ services:
     networks:
       - mynet
     volumes:
-      - ./data_adminer:/var/www/app
+      - ~/data/adminer:/var/www/app
 
   statiq:
     restart: on-failure
@@ -87,7 +87,7 @@ services:
     networks:
       - mynet
     volumes:
-      - ./data_statiq:/app/output
+      - ~/data/statiq:/app/output
 
   redis:
     restart: always
@@ -110,11 +110,5 @@ services:
       - PASSWORD=${PASSWORD}
       - DOMAIN_NAME=${DOMAIN_NAME}
 
-
-volumes:
-  data_wordpress: {}
-  data_mysql: {}
-  data_adminer: {}
-  data_statiq: {}
 networks:
   mynet:

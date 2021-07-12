@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:3.13
 LABEL maintainer="Julio <juligonz@student.42.fr>" 
 
 RUN apk update \
