@@ -15,16 +15,19 @@ _CYAN=$'\x1b[36m
 _WHITE=$'\x1b[37m
 
 
+NAME=inception
+
 all: $(NAME)
 
 $(NAME):
+	@
 	@echo "$(_GREEN)Building Images ...$(_END)"
-	@docker-compose build
+	@cd ./srcs && docker-compose build
 	@echo "$(_GREEN)Builds completed ! Starting everyting...$(_END)"
-	@docker-compose up
+	@cd ./srcs && docker-compose up
 
 clean:
-	@docker-compose down
+	@cd ./srcs && docker-compose down
 
 fclean: clean
 	@echo "$(_GREEN)$(NAME) Don't do that !$(_END)"

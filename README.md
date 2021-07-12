@@ -15,7 +15,8 @@ mail: e@e.com
 	- [x] add a way to execute scripts to setup db
 - [x] image Wordpress + php-fpm
 - [ ] Domain Name -> juligonz.42.fr
-- [ ] Makefile
+- [x] Makefile
+- [ ] Change volume folder
 
 Bonus:
 - [x] image ftp
