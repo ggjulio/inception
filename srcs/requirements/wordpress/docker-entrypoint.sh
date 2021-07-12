@@ -13,6 +13,7 @@ else
 	echo "Done."
 	cp /requirements/wp-config.php /var/www/app
 	chmod -R +rx /var/www/app
+	echo "Chmod done."
 fi
 
 is_redis_installed="$(wp --path=/var/www/app/  plugin list 2> /dev/null | grep redis-cache || true)"
