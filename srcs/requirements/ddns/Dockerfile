@@ -25,7 +25,7 @@ RUN apk update \
 	&& mkdir /etc/ddclient /var/cache/ddclient \
 	&& echo -e "# Custom Config\n\
 ssl=yes                                 									\n\
-use=web, web=checkip.dyndns.com/, web-skip='Current IP Address: '			\n\
+use=web, web=dynamicdns.park-your-domain.com/getip							\n\
 syslog=yes                              # log update msgs to syslog			\n\
 mail-failure=root                       # mail failed update msgs to root	\n\
 " > /etc/ddclient/ddclient.conf

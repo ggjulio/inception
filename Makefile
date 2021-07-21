@@ -35,8 +35,14 @@ $(NAME):
 	@echo "$(_GREEN)Builds completed ! Starting everyting...$(_END)"
 	@cd ./srcs && docker-compose up
 
+
 clean:
 	@cd ./srcs && docker-compose down
+
+up:
+	@cd ./srcs && docker-compose up
+
+down: clean
 
 fclean: clean
 	@-docker stop $(shell docker ps -qa)
@@ -52,4 +58,4 @@ fclean: clean
 re: fclean all
 
 
-.PHONY: clean fclean re all
+.PHONY: clean fclean up down re all
