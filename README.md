@@ -17,6 +17,7 @@ mail: e@e.com
 - [x] Domain Name -> juligonz.42.fr
 - [x] Makefile
 - [x] Change volume folder
+	- [x] Fix volume...driver....
 
 Bonus:
 - [x] image ftp
@@ -52,3 +53,10 @@ Note:
 - https://www.youtube.com/watch?v=43oQTRZqK9g
 - https://statiq.dev/web/themes/
 
+##### How to fix named volumes + host mount 
+- https://docs.docker.com/engine/reference/commandline/volume_create/#/driver-specific-options
+- https://man7.org/linux/man-pages/man8/mount.8.html
+- https://github.com/moby/moby/issues/19990
+- https://github.com/docker/compose/issues/7002
+- https://stackoverflow.com/questions/39496564/docker-volume-custom-mount-point
+- https://docs.docker.com/storage/volumes/

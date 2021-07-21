@@ -13,7 +13,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - ~/data/mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
 
   wordpress:
     restart: always
@@ -31,7 +31,7 @@ services:
       - MYSQL_HOST=${MYSQL_HOST}
       - WP_REDIS_HOST=${WP_REDIS_HOST}
     volumes:
-      - ~/data/wordpress:/var/www/app
+      - wordpress:/var/www/app
 
   nginx:
     restart: always
@@ -46,9 +46,9 @@ services:
       - 8080:8080 # adminer
       - 8081:8081 # Statiq website
     volumes:
-      - ~/data/wordpress:/var/www/app
-      - ~/data/adminer:/var/www/adminer
-      - ~/data/statiq:/var/www/statiq
+      - wordpress:/var/www/app
+      - adminer:/var/www/adminer
+      - statiq:/var/www/statiq
 
 # Bonus
   ftp:
@@ -67,7 +67,7 @@ services:
       - "20:20"
       - "20000-20009:20000-20009"
     volumes:
-      - ~/data/wordpress:/ftps_data
+      - wordpress:/ftps_data
 
   adminer:
     restart: always
@@ -78,7 +78,7 @@ services:
     networks:
       - mynet
     volumes:
-      - ~/data/adminer:/var/www/app
+      - adminer:/var/www/app
 
   statiq:
     restart: on-failure
@@ -87,7 +87,7 @@ services:
     networks:
       - mynet
     volumes:
-      - ~/data/statiq:/app/output
+      - statiq:/app/output
 
   redis:
     restart: always
@@ -109,6 +109,32 @@ services:
       - LOGIN=${LOGIN}
       - PASSWORD=${PASSWORD}
       - DOMAIN_NAME=${DOMAIN_NAME}
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/wordpress
+  mysql:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/mysql
+  adminer:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/adminer
+  statiq:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/statiq
 
 networks:
   mynet:

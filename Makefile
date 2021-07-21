@@ -29,7 +29,7 @@ NAME=inception
 all: $(NAME)
 
 $(NAME):
-	@
+	@mkdir -p ~/data/wordpress ~/data/mysql ~/data/adminer ~/data/statiq
 	@echo "$(_GREEN)Building Images ...$(_END)"
 	@cd ./srcs && docker-compose build
 	@echo "$(_GREEN)Builds completed ! Starting everyting...$(_END)"
@@ -39,13 +39,15 @@ clean:
 	@cd ./srcs && docker-compose down
 
 fclean: clean
-	@-docker stop $(shell docker ps -qa)  
+	@-docker stop $(shell docker ps -qa)
 	@-docker rm $(shell docker ps -qa)
 	@-docker rmi -f $(shell docker images -qa)
 	@-docker network rm $(shell docker network ls -q)
 	@-docker volume rm $(shell docker volume ls -q)
 	@-docker system prune -f
-	@echo "$(_GREEN) Deleted everyting, poor bandwidth ... :( $(_END)"
+	@echo "$(_GREEN) Everyting deleted, poor bandwidth ... :( $(_END)"
+	@sudo rm -rf ~/data
+	@echo "$(_GREEN) Folder ~/data deleted... $(_END)"
 
 re: fclean all
 
