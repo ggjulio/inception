@@ -32,10 +32,10 @@ if [ -z "$is_redis_installed" ]; then
 		echo "Failed to install redis-plugin !"
 		exit 1
 	fi
-	chmod -R +rx /var/www/app
 else
 	echo "Redis-cache plugin is already installed"
 fi
+chmod -R +rx /var/www/app
 wp --path=/var/www/app/ plugin activate redis-cache
 wp --path=/var/www/app redis enable
 
