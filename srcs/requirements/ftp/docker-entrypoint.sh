@@ -11,9 +11,9 @@ if [ -z $(id -u "$USER" 2> /dev/null) ]; then
 	echo "user $USER created"
 	echo "$USER:$PASSWORD" | chpasswd
 	mkdir -p /ftps_data/
-	chmod 770 -R /ftps_data
-	chown -R $USER /ftps_data
-	chgrp -R $USER /ftps_data
+#	chmod 770 -R /ftps_data
+#	chown -R $USER /ftps_data
+#	chgrp -R $USER /ftps_data
 
 	mkdir -p /var/log/vsftpd
 	touch /var/log/vsftpd/vsftpd.log
