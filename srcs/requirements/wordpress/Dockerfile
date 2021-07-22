@@ -11,7 +11,7 @@ daemonize = no														\n\
 error_log = /proc/self/fd/2											\n\
 																	\n\
 [www]																\n\
-; if we send this to /proc/self/fd/1, it never appears				\n\ 
+; if we send this to /proc/self/fd/1, it never appears				\n\
 access.log = /proc/self/fd/2'										\n\
 listen     = 9000													\n\
 clear_env  = no														\n\

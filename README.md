@@ -60,3 +60,9 @@ Note:
 - https://github.com/docker/compose/issues/7002
 - https://stackoverflow.com/questions/39496564/docker-volume-custom-mount-point
 - https://docs.docker.com/storage/volumes/
+
+##### user group nginx php
+- https://git.alpinelinux.org/aports/tree/main/nginx/nginx.pre-install?h=3.14-stable
+- https://stackoverflow.com/questions/48661327/docker-nginx-php-fpm-cross-container-permissions
+- https://stackoverflow.com/questions/55620273/docker-php-fpm-running-as-www-data
+- https://github.com/docker-library/php/blob/master/7.3/alpine3.13/cli/Dockerfile
